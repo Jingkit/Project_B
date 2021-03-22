@@ -14,6 +14,7 @@ namespace Main
         static void MainMenu()
         {
             Console.WriteLine("1. Log in\n2. Current Menu\n3. Future Menu\n4. Information about the Restaurant\n5. Exit");
+            Console.WriteLine("fnfknkanodsnfkanfanfahnfafaiofanofniofgnio");
             string x = Console.ReadLine();
             if(x == "1")
             {
