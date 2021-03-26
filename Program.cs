@@ -11,7 +11,7 @@ namespace Main
         {
             string theUser = "";
             bool stopProgram = false;
-            while (stopProgram == false)
+            while stopProgram == false)
             {
                 Console.WriteLine("1. Log in\n2. Current Menu\n3. Future Menu\n4. Information about the Restaurant\n5. Account\n6. Exit\n");
                 string x = Console.ReadLine();
