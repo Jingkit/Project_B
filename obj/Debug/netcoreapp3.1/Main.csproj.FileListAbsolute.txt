@@ -1,0 +1,15 @@
+C:\Project B\github\Project_B\bin\Debug\netcoreapp3.1\Main.exe
+C:\Project B\github\Project_B\bin\Debug\netcoreapp3.1\Main.deps.json
+C:\Project B\github\Project_B\bin\Debug\netcoreapp3.1\Main.runtimeconfig.json
+C:\Project B\github\Project_B\bin\Debug\netcoreapp3.1\Main.runtimeconfig.dev.json
+C:\Project B\github\Project_B\bin\Debug\netcoreapp3.1\Main.dll
+C:\Project B\github\Project_B\bin\Debug\netcoreapp3.1\Main.pdb
+C:\Project B\github\Project_B\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Project B\github\Project_B\obj\Debug\netcoreapp3.1\Main.csprojAssemblyReference.cache
+C:\Project B\github\Project_B\obj\Debug\netcoreapp3.1\Main.AssemblyInfoInputs.cache
+C:\Project B\github\Project_B\obj\Debug\netcoreapp3.1\Main.AssemblyInfo.cs
+C:\Project B\github\Project_B\obj\Debug\netcoreapp3.1\Main.csproj.CoreCompileInputs.cache
+C:\Project B\github\Project_B\obj\Debug\netcoreapp3.1\Main.csproj.CopyComplete
+C:\Project B\github\Project_B\obj\Debug\netcoreapp3.1\Main.dll
+C:\Project B\github\Project_B\obj\Debug\netcoreapp3.1\Main.pdb
+C:\Project B\github\Project_B\obj\Debug\netcoreapp3.1\Main.genruntimeconfig.cache
