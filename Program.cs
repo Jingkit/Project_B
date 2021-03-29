@@ -55,7 +55,7 @@ namespace Main
                 {
                     CurrentMenu();
                 }
-                if (x == "3") // DutureMenu
+                if (x == "3") // FutureMenu
                 {
                     FutureMenu();
                 }
