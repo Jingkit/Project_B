@@ -11,11 +11,11 @@ namespace Main
         {
             string theUser = "";
             bool stopProgram = false;
-            while stopProgram == false)
+            while (stopProgram == false)
             {
                 Console.WriteLine("1. Log in\n2. Current Menu\n3. Future Menu\n4. Information about the Restaurant\n5. Account\n6. Exit\n");
                 string x = Console.ReadLine();
-                if (x == "1")
+                if (x == "1") // Login 
                 {
                     LogIn();
                     string choice = Console.ReadLine();
@@ -51,19 +51,19 @@ namespace Main
                         continue;
                     }
                 }
-                if (x == "2")
+                if (x == "2") // Current Menu
                 {
                     CurrentMenu();
                 }
-                if (x == "3")
+                if (x == "3") // DutureMenu
                 {
                     FutureMenu();
                 }
-                if (x == "4")
+                if (x == "4") // Info
                 {
                     Info();
                 }
-                if (x == "5")
+                if (x == "5") // Account 
                 {
                     if (theUser == "")
                     {
@@ -71,27 +71,37 @@ namespace Main
                     }
                     else
                     {
-                        Console.Write("First Name: ");
-                        string name = Console.ReadLine();
-                        Console.Write("Last Name: ");
-                        string surname = Console.ReadLine();
-                        Console.Write("Email: ");
-                        string mail = Console.ReadLine();
-                        Console.Write("Phone Number: ");
-                        string number = Console.ReadLine();
-
-                        UserInfo info = new UserInfo(name, surname, mail, number);
-
-                        json createFile = new json()
+                        Console.WriteLine("1. Add personal information\n2. Edit personal information\n");
+                        string y = Console.ReadLine();
+                        if(y == "1")
                         {
-                            firstname = name,
-                            lastname = surname,
-                            email = mail,
-                            phone = number
-                        };
-                        string text = JsonConvert.SerializeObject(createFile);
-                        File.WriteAllText($"{theUser}.json", text);
-                        Console.WriteLine("Information saved succesfully\n");
+                            Console.Write("First Name: ");
+                            string name = Console.ReadLine();
+                            Console.Write("Last Name: ");
+                            string surname = Console.ReadLine();
+                            Console.Write("Email: ");
+                            string mail = Console.ReadLine();
+                            Console.Write("Phone Number: ");
+                            string number = Console.ReadLine();
+
+                            UserInfo info = new UserInfo(name, surname, mail, number);
+
+                            json createFile = new json()
+                            {
+                                firstname = name,
+                                lastname = surname,
+                                email = mail,
+                                phone = number
+                            };
+                            string text = JsonConvert.SerializeObject(createFile);
+                            File.WriteAllText($"{theUser}.json", text);
+                            Console.WriteLine("Information saved succesfully\n");
+                        }
+
+                        if (y == "2")
+                        {
+                            Console.WriteLine("empty for now");
+                        }
                     }
 
                 }
