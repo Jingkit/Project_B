@@ -9,184 +9,252 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            MainMenu(); 
+            string theUser = "";
+            bool stopProgram = false;
+            while (stopProgram == false)
+            {
+                Console.WriteLine("1. Log in\n2. Current Menu\n3. Future Menu\n4. Information about the Restaurant\n5. Account\n6. Exit\n");
+                string x = Console.ReadLine();
+                if (x == "1") // Login 
+                {
+                    LogIn();
+                    string choice = Console.ReadLine();
+                    if (choice == "1")
+                    {
+                        var userTuple = inputUsernamePassword();
+                        while (!Login(userTuple))
+                        {
+                            Console.WriteLine("Enter r to rety or q to quit");
+                            string quit = Console.ReadLine();
+                            if (quit == "r")
+                            {
+                                userTuple = inputUsernamePassword();
+                            }
+                            if (quit == "q")
+                            {
+                                Console.WriteLine("empty for now");
+                            }
+                        }
+                        Console.WriteLine("Login succesful\n");
+                        theUser = userTuple.Item1;
+                        continue;
+                    }
+                    if (choice == "2")
+                    {
+                        var userTuple = inputUsernamePassword();
+                        Register(userTuple);
+                        continue;
+                    }
+                    if (choice == "3")
+                    {
+                        Console.WriteLine("go back\n");
+                        continue;
+                    }
+                }
+                if (x == "2") // Current Menu
+                {
+                    CurrentMenuPage();
+                }
+                if (x == "3") // FutureMenu
+                {
+                    FutureMenu();
+                }
+                if (x == "4") // Info
+                {
+                    Info();
+                }
+                if (x == "5") // Account 
+                {
+                    if (theUser == "")
+                    {
+                        Console.WriteLine("You are not logged in\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("1. Add personal information\n2. Edit personal information\n");
+                        string y = Console.ReadLine();
+                        if (y == "1")
+                        {
+                            Console.Write("First Name: ");
+                            string name = Console.ReadLine();
+                            Console.Write("Last Name: ");
+                            string surname = Console.ReadLine();
+                            Console.Write("Email: ");
+                            string mail = Console.ReadLine();
+                            Console.Write("Phone Number: ");
+                            string number = Console.ReadLine();
+
+                            UserInfo info = new UserInfo(name, surname, mail, number);
+
+                            json createFile = new json()
+                            {
+                                firstname = name,
+                                lastname = surname,
+                                email = mail,
+                                phone = number
+                            };
+                            string text = JsonConvert.SerializeObject(createFile);
+                            File.WriteAllText($"{theUser}.json", text);
+                            Console.WriteLine("Information saved succesfully\n");
+                        }
+
+                        if (y == "2")
+                        {
+                            Console.WriteLine("empty for now");
+                        }
+                    }
+
+                }
+                if (x == "6")
+                {
+                    Exit();
+                }
+            }
+
+
         }
         static void MainMenu()
         {
-            Console.WriteLine("1. Log in\n2. Current Menu\n3. Future Menu\n4. Information about the Restaurant\n5. Exit");
+            Console.WriteLine("1. Log in\n2. Current Menu\n3. Future Menu\n4. Information about the Restaurant\n5. Account\n6. Exit");
             string x = Console.ReadLine();
-            if(x == "1")
+            if (x == "1")
             {
                 LogIn();
             }
-            if(x == "2")
+            if (x == "2")
             {
-                CurrentMenu();
+                CurrentMenuPage();
             }
-            if(x == "3")
+            if (x == "3")
             {
                 FutureMenu();
             }
-            if(x == "4")
+            if (x == "4")
             {
                 Info();
             }
-            if(x == "5")
+            if (x == "5")
+            {
+
+            }
+            if (x == "6")
             {
                 Exit();
             }
         }
         static void LogIn()
         {
-            bool adminLogin = false;
-            bool userLogin = false;
             Console.WriteLine("Press a numberkey to choose option");
             Console.WriteLine("1: Login");
             Console.WriteLine("2: Register new account");
             Console.WriteLine("0: Back");
-            string input = Console.ReadLine();
-            if (input == "2") // Register
+        }
+        static void CurrentMenuPage()
+        {
+            var json = File.ReadAllText("details.json");
+            dynamic stuff = JsonConvert.DeserializeObject(json);
+            foreach (var s in stuff)
             {
-                var user = inputUsernamePassword();
-
-                Register(user);
+                Console.WriteLine(s.Number + s.Dot + s.Name);
             }
-
-            else if (input == "1") // Login
-            {
-                var user = inputUsernamePassword();
-
-                if (user.Item1 == "Admin" && user.Item2 == "Admin")
-                {
-                    adminLogin = true;
-                }
-
-                else
-                {
-                    var login = Login(user);
-                    while (login == false && userLogin == false)
-                    {
-                        Console.WriteLine("Enter 0 to cancel, or press enter to retry");
-                        var quit = Console.ReadLine();
-                        if (quit == "0")
-                        {
-                            MainMenu();
-                        }
-                        user = inputUsernamePassword();
-                        login = Login(user);
-                        if (login == true)
-                        {
-                            Console.WriteLine("Login succesful");
-                            userLogin = true;
-                        }
-                    }
-                }
-            }
-
-            else if (input == "0") // Back
-            {
-                MainMenu();
-            }
-            
+            SortingMenu();
 
         }
-        static void CurrentMenu()
+        static void SortingMenu()
         {
-
             var json = File.ReadAllText("details.json");
             dynamic stuff = JsonConvert.DeserializeObject(json);
 
-            foreach (var s in stuff)
+            Console.WriteLine("\nPlease press the number of the dish you want to know more information about.\n" +
+                "Or press 'v' to sort for vegetarian dishes, 'g' for glutenfree, 'h' for halal food, s for spicy and \n'0' to go back to the Main menu, " +
+                "follow that up by pressing Enter.");
+            var dish = Console.ReadLine();
+            var n = dish;
+            List<string> list = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "0", "v", "g", "h", "b", "s" };
+
+            if (!list.Contains(n))
             {
-                Console.WriteLine(s.Number + s.Name);
+                Console.WriteLine("There is no such dish or command");
             }
-            Console.WriteLine("\nPlease press the number of the dish you want to know more information about.");
-            Console.WriteLine("Or press 0 to go back");
-            string Dish2 = Console.ReadLine();
-            int dish = Int32.Parse(Dish2);
-
-
-
-            if (dish == 0)
+            else if (dish == "v")
             {
+                Console.WriteLine("These are the vegetarian options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.Veggie == true)
+                    {
+                        string vegdishes = s.Number + s.Dot + s.Name + s.Price;
+                        Console.WriteLine(vegdishes);
+                    }
+                }
+            }
+            else if (dish == "s")
+            {
+                Console.WriteLine("These are the vegetarian options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.Spicy == true)
+                    {
+                        string spicedishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(spicedishes);
+                    }
+                }
+            }
+            else if (dish == "g")
+            {
+                Console.WriteLine("These are the glutenfree options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.GlutenFree == true)
+                    {
+                        string glfrdishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(glfrdishes);
+                    }
+                }
+            }
+            else if (dish == "h")
+            {
+                Console.WriteLine("These are the Halal options:\n");
+                foreach (var s in stuff)
+                {
+                    Console.WriteLine(s.Number + s.Dot + s.Name);
+                    if (s.Halal == true)
+                    {
+                        string halaldishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(halaldishes);
+                    }
+                }
+            }
+            else if (dish == "b")// if b is ur inpu, there will be a list of the dishes that are both vegetarian and glutenfree
+            {
+                Console.WriteLine("These are the vegeterian glutenfree options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.GlutenFree == true && s.Veggie == true)
+                    {
+                        string bothdish = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(bothdish);
+                    }
+                }
+            }
+            else if (dish == n && dish != "0")// n is the number you input, and here it will show the details for the specific dishes 
+            {
+                foreach (var s in stuff)
+                {
+                    if (s.Number == n)
+                    {
+                        Console.WriteLine("\n" + s.Name + s.Dot + "\n" + s.Ingredients);
+                    }
+                }
+            }
+            else if (dish == "0")
+            {
+                Console.WriteLine("\n\n");
                 MainMenu();
             }
-
-            if (dish == 1)
-            {
-                Console.WriteLine("sambai vinaigrette, sojaboontjes, sesam mayonaise, gepofte wilde rijst \n" +
-                    "€ 12,50");
-            }
-            else if (dish == 2)
-            {
-                Console.WriteLine("Hollands rund-truffel vinaigrette, oude kaas, rucola\n" +
-                    "12,50)");
-            }
-            else if (dish == 3)
-            {
-                Console.WriteLine("U get whatever u want!!!!!3");
-            }
-            else if (dish == 4)
-            {
-                Console.WriteLine("U get whatever u want!!!!!4");
-            }
-            else if (dish == 5)
-            {
-                Console.WriteLine("U get whatever u want!!!!!5");
-            }
-            else if (dish == 6)
-            {
-                Console.WriteLine("U get whatever u want!!!!!6");
-            }
-            else if (dish == 7)
-            {
-                Console.WriteLine("U get whatever u want!!!!!7");
-            }
-            else if (dish == 8)
-            {
-                Console.WriteLine("U get whatever u want!!!!!8");
-            }
-            else if (dish == 9)
-            {
-                Console.WriteLine("U get whatever u want!!!!!9");
-            }
-            else if (dish == 10)
-            {
-                Console.WriteLine("U get whatever u want!!!!!10");
-            }
-            else if (dish == 11)
-            {
-                Console.WriteLine("U get whatever u want!!!!!11");
-            }
-            else if (dish == 12)
-            {
-                Console.WriteLine("U get whatever u want!!!!!12");
-            }
-            else if (dish == 13)
-            {
-                Console.WriteLine("U get whatever u want!!!!!13");
-            }
-            else if (dish == 14)
-            {
-                Console.WriteLine("U get whatever u want!!!!!14");
-            }
-            else if (dish == 15)
-            {
-                Console.WriteLine("U get whatever u want!!!!!15");
-            }
-            else if (dish == 16)
-            {
-                Console.WriteLine("U get whatever u want!!!!!16");
-            }
-            else if (dish == 17)
-            {
-                Console.WriteLine("U get whatever u want!!!!!17");
-            }
-            else
-            {
-                Console.WriteLine("The is no such dish, please choose another dish!!!");
-            }
-
+            Console.WriteLine("Please press Enter to go back.");
+            Console.ReadLine();
+            CurrentMenuPage();
         }
         static void FutureMenu()
         {
@@ -235,7 +303,7 @@ namespace Main
             Console.WriteLine("Enter the dishnumber you want to view: ");
             Console.WriteLine("Or press 0 to go back");
             int dishNumber = Convert.ToInt32(Console.ReadLine());
-            
+
             if (dishNumber == 0)
             {
                 MainMenu();
@@ -251,7 +319,7 @@ namespace Main
             "16:00-21:00\n_________________________\n\nContact Us\n\nPhone Number: 071-5119113\n_________________________\n");
             Console.WriteLine("0. Previous Page");
             string x = Console.ReadLine();
-            if(x == "0")
+            if (x == "0")
             {
                 MainMenu();
             }
@@ -263,6 +331,15 @@ namespace Main
         static void Exit()
         {
             Console.WriteLine("Exit");
+        }
+        static void Account()
+        {
+            Console.WriteLine("1. Fill in personal information\n2. Edit personal information");
+            string x = Console.ReadLine();
+            if (x == "1")
+            {
+
+            }
         }
         public static void Register(Tuple<string, string> username) // Function to register an account using a tuple that consists of a username and password.
         {
@@ -286,18 +363,18 @@ namespace Main
                     usernamecheck = acc.ReadLine();
                     passwordcheck = acc.ReadLine();
                     acc.Close();
-                }
 
-                if (usernamecheck == username.Item1 && passwordcheck == username.Item2)
-                {
-                    return true;
-                }
+                    if (usernamecheck == username.Item1 && passwordcheck == username.Item2)
+                    {
+                        return true;
+                    }
 
-                else
-                {
-                    Console.WriteLine("Incorrect username or password");
-                    Console.WriteLine(" ");
-                    return false;
+                    else
+                    {
+                        Console.WriteLine("Incorrect username or password");
+                        Console.WriteLine(" ");
+                        return false;
+                    }
                 }
             }
             catch (FileNotFoundException)
@@ -317,6 +394,34 @@ namespace Main
 
             return Tuple.Create(username, password);
         }
-    }   
-    
+
+        public static void AddInfo()
+        {
+
+        }
+    }
+    class UserInfo
+    {
+        public string firstname;
+        public string lastname;
+        public string email;
+        public string phone;
+
+        public UserInfo(string name, string surname, string mail, string number)
+        {
+            firstname = name;
+            lastname = surname;
+            email = mail;
+            phone = number;
+        }
+    }
+
+    class json
+    {
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+    }
+
 }
