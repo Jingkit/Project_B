@@ -53,7 +53,7 @@ namespace Main
                 }
                 if (x == "2") // Current Menu
                 {
-                    CurrentMenu();
+                    CurrentMenuPage();
                 }
                 if (x == "3") // FutureMenu
                 {
@@ -123,7 +123,7 @@ namespace Main
             }
             if (x == "2")
             {
-                CurrentMenu();
+                CurrentMenuPage();
             }
             if (x == "3")
             {
@@ -149,103 +149,112 @@ namespace Main
             Console.WriteLine("2: Register new account");
             Console.WriteLine("0: Back");
         }
-        static void CurrentMenu()
+        static void CurrentMenuPage()
         {
+            var json = File.ReadAllText("details.json");
+            dynamic stuff = JsonConvert.DeserializeObject(json);
+            foreach (var s in stuff)
+            {
+                Console.WriteLine(s.Number + s.Dot + s.Name);
+            }
+            SortingMenu();
 
+        }
+        static void SortingMenu()
+        {
             var json = File.ReadAllText("details.json");
             dynamic stuff = JsonConvert.DeserializeObject(json);
 
-            foreach (var s in stuff)
+            Console.WriteLine("\nPlease press the number of the dish you want to know more information about.\n" +
+                "Or press 'v' to sort for vegetarian dishes, 'g' for glutenfree, 'h' for halal food, s for spicy and \n'0' to go back to the Main menu, " +
+                "follow that up by pressing Enter.");
+            var dish = Console.ReadLine();
+            var n = dish;
+            List<string> list = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "0", "v", "g", "h", "b", "s" };
+
+            if (!list.Contains(n))
             {
-                Console.WriteLine(s.Number + s.Name);
+                Console.WriteLine("There is no such dish or command");
             }
-            Console.WriteLine("\nPlease press the number of the dish you want to know more information about.");
-            Console.WriteLine("Or press 0 to go back");
-            string Dish2 = Console.ReadLine();
-            int dish = Int32.Parse(Dish2);
-
-
-
-            if (dish == 0)
+            else if (dish == "v")
             {
+                Console.WriteLine("These are the vegetarian options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.Veggie == true)
+                    {
+                        string vegdishes = s.Number + s.Dot + s.Name + s.Price;
+                        Console.WriteLine(vegdishes);
+                    }
+                }
+            }
+            else if (dish == "s")
+            {
+                Console.WriteLine("These are the vegetarian options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.Spicy == true)
+                    {
+                        string spicedishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(spicedishes);
+                    }
+                }
+            }
+            else if (dish == "g")
+            {
+                Console.WriteLine("These are the glutenfree options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.GlutenFree == true)
+                    {
+                        string glfrdishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(glfrdishes);
+                    }
+                }
+            }
+            else if (dish == "h")
+            {
+                Console.WriteLine("These are the Halal options:\n");
+                foreach (var s in stuff)
+                {
+                    Console.WriteLine(s.Number + s.Dot + s.Name);
+                    if (s.Halal == true)
+                    {
+                        string halaldishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(halaldishes);
+                    }
+                }
+            }
+            else if (dish == "b")// if b is ur inpu, there will be a list of the dishes that are both vegetarian and glutenfree
+            {
+                Console.WriteLine("These are the vegeterian glutenfree options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.GlutenFree == true && s.Veggie == true)
+                    {
+                        string bothdish = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(bothdish);
+                    }
+                }
+            }
+            else if (dish == n && dish != "0")// n is the number you input, and here it will show the details for the specific dishes 
+            {
+                foreach (var s in stuff)
+                {
+                    if (s.Number == n)
+                    {
+                        Console.WriteLine("\n" + s.Name + s.Dot + "\n" + s.Ingredients);
+                    }
+                }
+            }
+            else if (dish == "0")
+            {
+                Console.WriteLine("\n\n");
                 MainMenu();
             }
-
-            if (dish == 1)
-            {
-                Console.WriteLine("sambai vinaigrette, sojaboontjes, sesam mayonaise, gepofte wilde rijst \n" +
-                    "€ 12,50");
-            }
-            else if (dish == 2)
-            {
-                Console.WriteLine("Hollands rund-truffel vinaigrette, oude kaas, rucola\n" +
-                    "12,50)");
-            }
-            else if (dish == 3)
-            {
-                Console.WriteLine("U get whatever u want!!!!!3");
-            }
-            else if (dish == 4)
-            {
-                Console.WriteLine("U get whatever u want!!!!!4");
-            }
-            else if (dish == 5)
-            {
-                Console.WriteLine("U get whatever u want!!!!!5");
-            }
-            else if (dish == 6)
-            {
-                Console.WriteLine("U get whatever u want!!!!!6");
-            }
-            else if (dish == 7)
-            {
-                Console.WriteLine("U get whatever u want!!!!!7");
-            }
-            else if (dish == 8)
-            {
-                Console.WriteLine("U get whatever u want!!!!!8");
-            }
-            else if (dish == 9)
-            {
-                Console.WriteLine("U get whatever u want!!!!!9");
-            }
-            else if (dish == 10)
-            {
-                Console.WriteLine("U get whatever u want!!!!!10");
-            }
-            else if (dish == 11)
-            {
-                Console.WriteLine("U get whatever u want!!!!!11");
-            }
-            else if (dish == 12)
-            {
-                Console.WriteLine("U get whatever u want!!!!!12");
-            }
-            else if (dish == 13)
-            {
-                Console.WriteLine("U get whatever u want!!!!!13");
-            }
-            else if (dish == 14)
-            {
-                Console.WriteLine("U get whatever u want!!!!!14");
-            }
-            else if (dish == 15)
-            {
-                Console.WriteLine("U get whatever u want!!!!!15");
-            }
-            else if (dish == 16)
-            {
-                Console.WriteLine("U get whatever u want!!!!!16");
-            }
-            else if (dish == 17)
-            {
-                Console.WriteLine("U get whatever u want!!!!!17");
-            }
-            else
-            {
-                Console.WriteLine("The is no such dish, please choose another dish!!!");
-            }
-
+            Console.WriteLine("Please press Enter to go back.");
+            Console.ReadLine();
+            CurrentMenuPage();
         }
         static void FutureMenu()
         {
