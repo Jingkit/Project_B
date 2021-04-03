@@ -34,12 +34,20 @@ namespace Main
                             }
                             if (quit == "q")
                             {
-                                Console.WriteLine("empty for now");
+                                break;
                             }
                         }
-                        Console.WriteLine("Login succesful\n");
-                        theUser = userTuple.Item1;
-                        continue;
+                        if (Login(userTuple))
+                        {
+                            Console.WriteLine("Login succesful\n");
+                            theUser = userTuple.Item1;
+                            continue;
+                        }
+                        else
+                        {
+                            theUser = "";
+                        }
+
                     }
                     if (choice == "2")
                     {
@@ -47,9 +55,8 @@ namespace Main
                         Register(userTuple);
                         continue;
                     }
-                    if (choice == "3")
+                    if (choice == "0")
                     {
-                        Console.WriteLine("go back\n");
                         continue;
                     }
                 }
@@ -94,7 +101,7 @@ namespace Main
                                 phone = number
                             };
                             string text = JsonConvert.SerializeObject(createFile);
-                            File.WriteAllText($"{theUser}.json", text);
+                            File.WriteAllText($"{theUser}_info.json", text);
                             Console.WriteLine("Information saved succesfully\n");
                         }
 
@@ -108,7 +115,7 @@ namespace Main
                 }
                 if (x == "7")
                 {
-                    Exit();
+                    stopProgram = true;
                 }
                 if (x == "2")
                 {
@@ -118,7 +125,7 @@ namespace Main
                         bool userNoInfo = true;
                         try
                         {
-                            info = File.ReadAllText($"{theUser}.json");
+                            info = File.ReadAllText($"{theUser}_info.json");
                             userNoInfo = false;
                         }
                         catch (FileNotFoundException)
@@ -128,7 +135,7 @@ namespace Main
 
                         if(userNoInfo == false)
                         {
-                            dynamic infoDict = JsonConvert.DeserializeObject(File.ReadAllText($"{theUser}.json"));
+                            dynamic infoDict = JsonConvert.DeserializeObject(File.ReadAllText($"{theUser}_info.json"));
                             JToken name = infoDict.SelectToken("firstname");
                             JToken lastname = infoDict.SelectToken("lastname");
                             JToken email = infoDict.SelectToken("email");
