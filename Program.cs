@@ -155,7 +155,7 @@ namespace Main
             dynamic stuff = JsonConvert.DeserializeObject(json);
             foreach (var s in stuff)
             {
-                Console.WriteLine(s.Number + s.Dot + s.Name);
+                Console.WriteLine(s.Number + s.Dot + s.Name + s.Price);
             }
             SortingMenu();
 
@@ -243,7 +243,7 @@ namespace Main
                 {
                     if (s.Number == n)
                     {
-                        Console.WriteLine("\n" + s.Name + s.Dot + "\n" + s.Ingredients);
+                        Console.WriteLine("\n" + s.Name + s.Dot + s.Price + "\n" + s.Ingredients);
                     }
                 }
             }
