@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "AwsJCDINE9eQALn/tuK5QPZZJXyuedObZra0UpozG0+pW4PjvcVgmKzSsXrGVEyf7qiyDFBMzWvNQ0I0qjarkA==",
+  "dgSpecHash": "gBKKzb0/+o5rnkLVQ0UVlGl16sg+YUJkeNIX4kmmbZkEgAsB77u+1SE9DPSyXGR0uN1EYpj+UFpyHYIsjsFxZw==",
   "success": true,
-  "projectFilePath": "C:\\Project B\\github\\Project_B\\Main.csproj",
+  "projectFilePath": "C:\\Users\\ayubs\\source\\repos\\Jingkit\\Project_B\\Main.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Jingk\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\ayubs\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }
