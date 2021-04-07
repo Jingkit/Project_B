@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Main
 {
@@ -13,7 +15,7 @@ namespace Main
             bool stopProgram = false;
             while (stopProgram == false)
             {
-                Console.WriteLine("1. Log in\n2. Current Menu\n3. Future Menu\n4. Information about the Restaurant\n5. Account\n6. Exit\n");
+                Console.WriteLine("1. Log in\n2. Reserve table\n3. Current Menu\n4. Future Menu\n5. Information about the Restaurant\n6. Account\n7. Exit\n");
                 string x = Console.ReadLine();
                 if (x == "1") // Login 
                 {
@@ -32,12 +34,20 @@ namespace Main
                             }
                             if (quit == "q")
                             {
-                                Console.WriteLine("empty for now");
+                                break;
                             }
                         }
-                        Console.WriteLine("Login succesful\n");
-                        theUser = userTuple.Item1;
-                        continue;
+                        if (Login(userTuple))
+                        {
+                            Console.WriteLine("Login succesful\n");
+                            theUser = userTuple.Item1;
+                            continue;
+                        }
+                        else
+                        {
+                            theUser = "";
+                        }
+
                     }
                     if (choice == "2")
                     {
@@ -45,25 +55,24 @@ namespace Main
                         Register(userTuple);
                         continue;
                     }
-                    if (choice == "3")
+                    if (choice == "0")
                     {
-                        Console.WriteLine("go back\n");
                         continue;
                     }
                 }
-                if (x == "2") // Current Menu
+                if (x == "3") // Current Menu
                 {
                     CurrentMenuPage();
                 }
-                if (x == "3") // FutureMenu
+                if (x == "4") // FutureMenu
                 {
                     FutureMenu();
                 }
-                if (x == "4") // Info
+                if (x == "5") // Info
                 {
                     Info();
                 }
-                if (x == "5") // Account 
+                if (x == "6") // Account 
                 {
                     if (theUser == "")
                     {
@@ -71,9 +80,9 @@ namespace Main
                     }
                     else
                     {
-                        Console.WriteLine("1. Add personal information\n2. Edit personal information\n");
+                        Console.WriteLine("1. Add/edit personal information\n2. Back\n");
                         string y = Console.ReadLine();
-                        if(y == "1")
+                        if (y == "1")
                         {
                             Console.Write("First Name: ");
                             string name = Console.ReadLine();
@@ -84,8 +93,6 @@ namespace Main
                             Console.Write("Phone Number: ");
                             string number = Console.ReadLine();
 
-                            UserInfo info = new UserInfo(name, surname, mail, number);
-
                             json createFile = new json()
                             {
                                 firstname = name,
@@ -94,20 +101,68 @@ namespace Main
                                 phone = number
                             };
                             string text = JsonConvert.SerializeObject(createFile);
-                            File.WriteAllText($"{theUser}.json", text);
+                            File.WriteAllText($"{theUser}_info.json", text);
                             Console.WriteLine("Information saved succesfully\n");
                         }
 
                         if (y == "2")
                         {
-                            Console.WriteLine("empty for now");
+                            continue;
                         }
+
                     }
 
                 }
-                if (x == "6")
+                if (x == "7")
                 {
-                    Exit();
+                    stopProgram = true;
+                }
+                if (x == "2")
+                {
+                    if (theUser != "")
+                    {
+                        string info;
+                        bool userNoInfo = true;
+                        try
+                        {
+                            info = File.ReadAllText($"{theUser}_info.json");
+                            userNoInfo = false;
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            userNoInfo = true;
+                        }
+
+                        if (userNoInfo == false)
+                        {
+                            dynamic infoDict = JsonConvert.DeserializeObject(File.ReadAllText($"{theUser}_info.json"));
+                            JToken name = infoDict.SelectToken("firstname");
+                            JToken lastname = infoDict.SelectToken("lastname");
+                            JToken email = infoDict.SelectToken("email");
+                            JToken number = infoDict.SelectToken("phone");
+                            string firstname = name.ToString();
+                            string surName = lastname.ToString();
+                            string mail = email.ToString();
+                            string phone = number.ToString();
+                            UserInfo reserveInfo = new UserInfo(firstname, surName, mail, phone);
+                            Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
+                            Console.WriteLine("1. Next\n2. Cancel\n");
+                            string input = Console.ReadLine();
+                            if (input == "1")
+                            {
+                                Console.WriteLine("Seat choice etc.");
+                            }
+                            if (input == "2")
+                            {
+                                continue;
+                            }
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Reserve table with no account");
+                        }
+                    }
                 }
             }
 
@@ -332,15 +387,7 @@ namespace Main
         {
             Console.WriteLine("Exit");
         }
-        static void Account()
-        {
-            Console.WriteLine("1. Fill in personal information\n2. Edit personal information");
-            string x = Console.ReadLine();
-            if (x == "1")
-            {
 
-            }
-        }
         public static void Register(Tuple<string, string> username) // Function to register an account using a tuple that consists of a username and password.
         {
             using (StreamWriter text = new StreamWriter(File.Create($"C:\\{username.Item1}.json")))
@@ -400,7 +447,7 @@ namespace Main
 
         }
     }
-    class UserInfo
+    public class UserInfo
     {
         public string firstname;
         public string lastname;
@@ -409,10 +456,10 @@ namespace Main
 
         public UserInfo(string name, string surname, string mail, string number)
         {
-            firstname = name;
-            lastname = surname;
-            email = mail;
-            phone = number;
+            this.firstname = name;
+            this.lastname = surname;
+            this.email = mail;
+            this.phone = number;
         }
     }
 
