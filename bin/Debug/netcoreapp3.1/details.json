@@ -1,220 +1,270 @@
-[
-  { "Name": "         Appetizers", "Number": null,"Price": null},
+{
   {
+    "Name": "         Appetizers",
+    "Number": null,
+    "Price": null
+  },
+  "Dish1": {
     "Dot": ".",
     "Name": "Sashimi tonijn",
-    "Veggie": false,
-    "Fish": true,
-    "Drink": false,
-    "Price": "€10.00",
+    "Price": "$10.00",
     "Number": "1",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": true,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish2": {
     "Dot": ".",
     "Name": "Carpaccio",
-    "Veggie": true,
-    "Fish": true,
-    "Drink": false,
-    "Price": "€11.00",
+    "Price": "$11.00",
     "Number": "2",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish3": {
     "Dot": ".",
     "Name": "Huzarensalade",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": false,
     "Price": "$9.50",
     "Number": "3",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {"Name": "         Entremets", "Number": null, "Price": null},
   {
+    "Name": "         Entremets",
+    "Number": null,
+    "Price": null
+  },
+  "Dish4": {
     "Dot": ".",
     "Name": "Soep",
-    "Veggie": true,
-    "Fish": true,
-    "Drink": false,
-    "Price": "€12.00",
+    "Price": "$12.00",
     "Number": "4",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish5": {
     "Dot": ".",
     "Name": "Pasta",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": false,
-    "Price": "€13.00",
+    "Price": "$13.00",
     "Number": "5",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": true,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish6": {
     "Dot": ".",
     "Name": "Eendenborst",
-    "Veggie": false,
-    "Fish": false,
-    "Drink": false,
-    "Price": "€12.50",
+    "Price": "$12.50",
     "Number": "6",
-    "GlutenFree": true,
-    "Halal": false,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {"Name": "         Main Dishes", "Number": null, "Price": null},
   {
+    "Name": "         Main Dishes",
+    "Number": null,
+    "Price": null
+  },
+  "Dish7": {
     "Dot": ".",
     "Name": "Biefstuk met knoflookaardappeltjes",
-    "Veggie": false,
-    "Fish": false,
-    "Drink": false,
-    "Price": "€12.00",
+    "Price": "$12.00",
     "Number": "7",
-    "GlutenFree": true,
-    "Halal": false,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish8": {
     "Dot": ".",
     "Name": "Vis van de dag",
-    "Veggie": null,
-    "Fish": true,
-    "Drink": false,
-    "Price": "€13.50",
+    "Price": "$13.50",
     "Number": "8",
-    "GlutenFree": true,
-    "Halal": true,
-
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish9": {
     "Dot": ".",
     "Name": "Kibbeling",
-    "Veggie": null,
-    "Fish": false,
-    "Drink": false,
-    "Price": "€11.00",
+    "Price": "$11.00",
     "Number": "9",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish10": {
     "Dot": ".",
     "Name": "Lasagne",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": false,
-    "Price": "€11.50",
+    "Price": "$11.50",
     "Number": "10",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
 
   },
-  {"Name": "         Deserts", "Number": null, "Price": null},
   {
+    "Name": "         Deserts",
+    "Number": null,
+    "Price": null
+  },
+  "Dish11": {
     "Dot": ".",
     "Name": "Panna Cotta",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": false,
-    "Price": "€10.00",
+    "Price": "$10.00",
     "Number": "11",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish12": {
     "Dot": ".",
     "Name": "Bitterkoekjes",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": true,
-    "Price": "€9.00",
+    "Price": "$9.00",
     "Number": "12",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
 
   },
-  {
+  "Dish13": {
     "Dot": ".",
     "Name": "Kaasplateau",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": false,
-    "Price": "€11.00",
+    "Price": "$11.00",
     "Number": "13",
-    "GlutenFree": true,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
 
   },
-  {"Name": "         Drinks", "Number": null, "Price": null},
   {
+    "Name": "         Drinks",
+    "Number": null,
+    "Price": null
+  },
+  "Dish14": {
     "Dot": ".",
     "Name": "Frisdrank/Soda",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": true,
     "Price": "May vary",
     "Number": "14",
-    "GlutenFree": false,
-    "Halal": true,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish15": {
     "Dot": ".",
     "Name": "Wijn",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": true,
     "Price": "May vary",
-    "Number": "15",
-    "GlutenFree": false,
-    "Halal": false,
-    "Spicy": false,
+    "Number": "15", 
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  {
+  "Dish16": {
     "Dot": ".",
     "Name": "Beer",
-    "Veggie": true,
-    "Fish": false,
-    "Drink": true,
     "Price": "May vary",
     "Number": "16",
-    "GlutenFree": false,    
-    "Halal": false,
-    "Spicy": false,
+    "Sort": {
+      "Veggie": true,
+      "Fish": false,
+      "Drink": true,
+      "GlutenFree": false,
+      "Halal": false,
+      "Spicy": false
+    },
     "Ingredients": "ingredients 123 idk for right now"
   }
-]
-
+}
