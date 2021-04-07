@@ -1,14 +1,13 @@
-{
+﻿[
   {
-    "Name": "         Appetizers",
-    "Number": null,
-    "Price": null
+    "Name": "______________________\n         Menu\n______________________\n\n         Apetizers",
+    "Number": null
   },
-  "Dish1": {
-    "Dot": ".",
-    "Name": "Sashimi tonijn",
-    "Price": "$10.00",
+  {
+    "Dot": ". ",
     "Number": "1",
+    "Name": "Sashimi tonijn",
+    "Price": "$10.00",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -19,11 +18,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish2": {
-    "Dot": ".",
-    "Name": "Carpaccio",
-    "Price": "$11.00",
+  {
+    "Dot": ". ",
     "Number": "2",
+    "Name": "Carpaccio",
+    "Price": "$11.00",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -34,11 +33,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish3": {
-    "Dot": ".",
-    "Name": "Huzarensalade",
-    "Price": "$9.50",
+  {
+    "Dot": ". ",
     "Number": "3",
+    "Name": "Huzarensalade",    
+    "Price": "$9.50",
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -51,14 +50,13 @@
   },
   {
     "Name": "         Entremets",
-    "Number": null,
-    "Price": null
+    "Number": null
   },
-  "Dish4": {
-    "Dot": ".",
-    "Name": "Soep",
-    "Price": "$12.00",
+  {
+    "Dot": ". ",
     "Number": "4",
+    "Name": "Soep",
+    "Price": "$12.00",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -69,11 +67,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish5": {
-    "Dot": ".",
-    "Name": "Pasta",
-    "Price": "$13.00",
+  {
+    "Dot": ". ",
     "Number": "5",
+    "Name": "Pasta",
+    "Price": "$13.00",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -84,11 +82,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish6": {
-    "Dot": ".",
-    "Name": "Eendenborst",
-    "Price": "$12.50",
+  {
+    "Dot": ". ",
     "Number": "6",
+    "Name": "Eendenborst",
+    "Price": "$12.50",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -101,14 +99,13 @@
   },
   {
     "Name": "         Main Dishes",
-    "Number": null,
-    "Price": null
+    "Number": null
   },
-  "Dish7": {
-    "Dot": ".",
-    "Name": "Biefstuk met knoflookaardappeltjes",
-    "Price": "$12.00",
+  {
+    "Dot": ". ",
     "Number": "7",
+    "Name": "Biefstuk met knoflookaardappeltjes",
+    "Price": "$12.00",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -119,11 +116,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish8": {
-    "Dot": ".",
-    "Name": "Vis van de dag",
-    "Price": "$13.50",
+  {
+    "Dot": ". ",
     "Number": "8",
+    "Name": "Vis van de dag",
+    "Price": "$13.50",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -134,11 +131,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish9": {
-    "Dot": ".",
-    "Name": "Kibbeling",
-    "Price": "$11.00",
+  {
+    "Dot": ". ",
     "Number": "9",
+    "Name": "Kibbeling",
+    "Price": "$11.00",   
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -149,11 +146,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish10": {
-    "Dot": ".",
-    "Name": "Lasagne",
-    "Price": "$11.50",
+  {
+    "Dot": ". ",
     "Number": "10",
+    "Name": "Lasagne",
+    "Price": "$11.50",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -163,18 +160,16 @@
       "Spicy": false
     },
     "Ingredients": "ingredients 123 idk for right now"
-
   },
   {
     "Name": "         Deserts",
-    "Number": null,
-    "Price": null
+    "Number": null
   },
-  "Dish11": {
-    "Dot": ".",
-    "Name": "Panna Cotta",
-    "Price": "$10.00",
+  {
+    "Dot": ". ",
     "Number": "11",
+    "Name": "Panna Cotta",
+    "Price": "$10.00",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -185,8 +180,8 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish12": {
-    "Dot": ".",
+  {
+    "Dot": ". ",
     "Name": "Bitterkoekjes",
     "Price": "$9.00",
     "Number": "12",
@@ -199,13 +194,12 @@
       "Spicy": false
     },
     "Ingredients": "ingredients 123 idk for right now"
-
   },
-  "Dish13": {
-    "Dot": ".",
+  {
+    "Dot": ". ",
     "Name": "Kaasplateau",
-    "Price": "$11.00",
     "Number": "13",
+    "Price": "$11.00",   
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -215,18 +209,16 @@
       "Spicy": false
     },
     "Ingredients": "ingredients 123 idk for right now"
-
   },
   {
     "Name": "         Drinks",
-    "Number": null,
-    "Price": null
+    "Number": null
   },
-  "Dish14": {
-    "Dot": ".",
-    "Name": "Frisdrank/Soda",
-    "Price": "May vary",
+  {
+    "Dot": ". ",
     "Number": "14",
+    "Name": "Frisdrank/Soda",
+    "Price": "May vary",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -237,11 +229,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish15": {
-    "Dot": ".",
+  {
+    "Dot": ". ",
+    "Number": "15",
     "Name": "Wijn",
-    "Price": "May vary",
-    "Number": "15", 
+    "Price": "May vary",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -252,11 +244,11 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   },
-  "Dish16": {
-    "Dot": ".",
-    "Name": "Beer",
-    "Price": "May vary",
+  {
+    "Dot": ". ",
     "Number": "16",
+    "Name": "Beer",
+    "Price": "May vary",    
     "Sort": {
       "Veggie": true,
       "Fish": false,
@@ -267,4 +259,4 @@
     },
     "Ingredients": "ingredients 123 idk for right now"
   }
-}
+]
