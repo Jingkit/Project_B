@@ -206,8 +206,7 @@ namespace Main
         }
         static void CurrentMenuPage()
         {
-            var json = File.ReadAllText("details.json");
-            dynamic stuff = JsonConvert.DeserializeObject(json);
+            dynamic stuff = JsonConvert.DeserializeObject(File.ReadAllText("details.json"));
             foreach (var s in stuff)
             {
                 Console.WriteLine(s.Number + s.Dot + s.Name);
