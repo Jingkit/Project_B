@@ -156,7 +156,6 @@ namespace Main
                             {
                                 continue;
                             }
-
                         }
                         else
                         {
@@ -220,15 +219,38 @@ namespace Main
             Console.WriteLine("\nPlease press the number of the dish you want to know more information about.\n" +
                 "Or press 'v' to sort for vegetarian dishes, 'g' for glutenfree, 'h' for halal food, s for spicy and \n'0' to go back to the Main menu, " +
                 "follow that up by pressing Enter.");
-            var dish = Console.ReadLine();
-            var n = dish;
-            List<string> list = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "0", "v", "g", "h", "b", "s" };
+            //do you want to sort for dishes or information about the dishes, press 's' to sort or the number for the dish
+            string asked = Console.ReadLine();
+            
+            List<string> list = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "0", "s" };
 
-            if (!list.Contains(n))
+            if (!list.Contains(asked))
             {
                 Console.WriteLine("There is no such dish or command");
             }
-            while (dish != "0" ) {
+            if (!list.Contains(asked) && asked != "0")// asked is the number you input, and here it will show the details for the specific dishes 
+            {
+                foreach (var s in stuff)
+                {
+                    if (asked == s.Number)
+                    {
+                        Console.WriteLine("\n" + s.Name + s.Dot + s.Price + "\n" + s.Ingredients);
+                    }
+                }
+            }
+            else if (asked == "0")
+            {
+                Console.WriteLine("\n\n");
+                MainMenu();
+            }
+            while (!list.Contains(asked)) {
+                List<string> list1 = new List<string>() {"0", "v", "g", "h", "b", "s" };
+                var dish = Console.ReadLine();
+                if (dish == "0") { break; }
+                if (!list1.Contains(dish))
+                {
+                    Console.WriteLine("Please press 0, v, g, h, b, s");
+                }
                 if (dish == "v")
                 {
                     Console.WriteLine("These are the vegetarian options:\n");
@@ -254,7 +276,7 @@ namespace Main
                         }
                     }
                     break;
-                }                
+                }
                 else if (dish == "g")
                 {
                     Console.WriteLine("These are the glutenfree options:\n");
@@ -280,23 +302,7 @@ namespace Main
                         }
                     }
                     break;
-                }                
-                else if (dish == n && dish != "0")// n is the number you input, and here it will show the details for the specific dishes 
-                {
-                    foreach (var s in stuff)
-                    {
-                        if (s.Number == n)
-                        {
-                            Console.WriteLine("\n" + s.Name + s.Dot + s.Price + "\n" + s.Ingredients);
-                        }
-                    }
                 }
-                break;
-            }         
-            if (dish == "0")
-            {
-                Console.WriteLine("\n\n");
-                MainMenu();
             }
             Console.WriteLine("Please press Enter to go back.");
             Console.ReadLine();
