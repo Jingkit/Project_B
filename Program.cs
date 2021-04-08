@@ -3,7 +3,6 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Collections;
 
 namespace Main
 {
@@ -215,99 +214,86 @@ namespace Main
         static void SortingMenu()
         {
             dynamic stuff = JsonConvert.DeserializeObject(File.ReadAllText("details.json"));
-
+            
             Console.WriteLine("\nPlease press the number of the dish you want to know more information about.\n" +
                 "Or press 'v' to sort for vegetarian dishes, 'g' for glutenfree, 'h' for halal food, s for spicy and \n'0' to go back to the Main menu, " +
                 "follow that up by pressing Enter.");
             //do you want to sort for dishes or information about the dishes, press 's' to sort or the number for the dish
-            string asked = Console.ReadLine();
-            
-            List<string> list = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "0", "s" };
 
-            if (!list.Contains(asked))
+            List<string> list = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "0", "s", "v", "h", "g" };
+
+            string dish = Console.ReadLine();
+
+            if (!list.Contains(dish))
             {
                 Console.WriteLine("There is no such dish or command");
             }
-            if (!list.Contains(asked) && asked != "0")// asked is the number you input, and here it will show the details for the specific dishes 
+            if (dish == "v")
+            {   
+                Console.WriteLine("These are the vegetarian options:\n");
+                dynamic result = from s in stuff.Sort
+                             where s.veggie == true
+                             select s;
+
+                foreach (var student in result)
+
+            }
+            else if (dish == "s")
             {
+                Console.WriteLine("These are the vegetarian options:\n");
                 foreach (var s in stuff)
                 {
-                    if (asked == s.Number)
+                    if (s.Spicy == true)
                     {
-                        Console.WriteLine("\n" + s.Name + s.Dot + s.Price + "\n" + s.Ingredients);
+                        string spicedishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(spicedishes);
                     }
                 }
             }
-            else if (asked == "0")
+            else if (dish == "g")
+            {
+                Console.WriteLine("These are the glutenfree options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.GlutenFree == true)
+                    {
+                        string glfrdishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(glfrdishes);
+                    }
+                }
+            }
+            else if (dish == "h")
+            {
+                Console.WriteLine("These are the Halal options:\n");
+                foreach (var s in stuff)
+                {
+                    if (s.Halal == true)
+                    {
+                        string halaldishes = s.Number + s.Dot + s.Name;
+                        Console.WriteLine(halaldishes);
+                    }
+                }
+            }
+            else if (dish == "0")
             {
                 Console.WriteLine("\n\n");
                 MainMenu();
-            }
-            while (!list.Contains(asked)) {
-                List<string> list1 = new List<string>() {"0", "v", "g", "h", "b", "s" };
-                var dish = Console.ReadLine();
-                if (dish == "0") { break; }
-                if (!list1.Contains(dish))
+            }                       
+            else if (list.Contains(dish) && dish != "0")// asked is the number you input, and here it will show the details for the specific dishes 
+            {
+                foreach (var s in stuff)
                 {
-                    Console.WriteLine("Please press 0, v, g, h, b, s");
-                }
-                if (dish == "v")
-                {
-                    Console.WriteLine("These are the vegetarian options:\n");
-                    foreach (var s in stuff)
+                    if (s.Number == dish)
                     {
-                        if (s.Veggie == true)
-                        {
-                            string vegdishes = s.Number + s.Dot + s.Name + s.Price;
-                            Console.WriteLine(vegdishes);
-                        }
+                        Console.WriteLine("\n" + s.Name + s.Dot + s.Price + "\n" + s.Ingredients);
                     }
-                    break;
-                }
-                else if (dish == "s")
-                {
-                    Console.WriteLine("These are the vegetarian options:\n");
-                    foreach (var s in stuff)
-                    {
-                        if (s.Spicy == true)
-                        {
-                            string spicedishes = s.Number + s.Dot + s.Name;
-                            Console.WriteLine(spicedishes);
-                        }
-                    }
-                    break;
-                }
-                else if (dish == "g")
-                {
-                    Console.WriteLine("These are the glutenfree options:\n");
-                    foreach (var s in stuff)
-                    {
-                        if (s.GlutenFree == true)
-                        {
-                            string glfrdishes = s.Number + s.Dot + s.Name;
-                            Console.WriteLine(glfrdishes);
-                        }
-                    }
-                    break;
-                }
-                else if (dish == "h")
-                {
-                    Console.WriteLine("These are the Halal options:\n");
-                    foreach (var s in stuff)
-                    {
-                        if (s.Halal == true)
-                        {
-                            string halaldishes = s.Number + s.Dot + s.Name;
-                            Console.WriteLine(halaldishes);
-                        }
-                    }
-                    break;
                 }
             }
             Console.WriteLine("Please press Enter to go back.");
             Console.ReadLine();
             CurrentMenuPage();
         }
+        
 
 
 
