@@ -43,7 +43,7 @@
     "Ingredients": "De Ingredienten zijn:\n125 gram magere spekreepjes -, 1/2 komkommer -, 1 bakje cherrytomaatjes -, \n4 scharreleieren M -, 1 zak sla-mix frisee a 200 gram -, 4 eetlepels slasaus naturel -, \n1 bak huzarensalade a 1000 gram -, 1 rode ui, gesnipperd -, 2 eetlepels fijngeknipt bieslook"
   },
   {
-    "Name": "         Entremets",
+    "Name": "______________________\n         Entremets",
     "Number": null,
     "Price": null
   },
@@ -87,7 +87,7 @@
     "Ingredients": "De Ingredienten zijn:\n4 perssinaasappels, 2 el. vloeibare honing, 2 el. droge sherry, 2 tll ketjap asin, \n1 tl. kerriepoeder, \n2 tamme eendenborstfilets (ca. 600 gram), 2 grote handsinaasappels, 150 gram boter, zout, peper, 4 el. slagroom"
   },
   {
-    "Name": "         Main Dishes",
+    "Name": "______________________\n         Main Dishes",
     "Number": null,
     "Price": null
   },
@@ -146,7 +146,7 @@
 
   },
   {
-    "Name": "         Deserts",
+    "Name": "______________________\n         Deserts",
     "Number": null,
     "Price": null
   },
@@ -191,7 +191,7 @@
 
   },
   {
-    "Name": "         Drinks",
+    "Name": "______________________\n         Drinks",
     "Number": null,
     "Price": null
   },
