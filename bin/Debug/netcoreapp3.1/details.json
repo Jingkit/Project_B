@@ -4,290 +4,234 @@
     "Number": null
   },
   {
-    "Dot": ". ",
-    "Number": "1",
+    "Dot": ".",
     "Name": "Sashimi tonijn",
+    "Veggie": false,
+    "Fish": true,
+    "Drink": false,
     "Price": "$10.00",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Number": "1",
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": true,
+    "Ingredients": "De Ingredienten zijn:\n225 gram rauwe tonijn; of rauwe zalmfilet 1/2 ~daikonwortel , fijngeraspt saus, \n6 eetlepels ~sojasaus 3 eetlepels vers citroensap"
   },
   {
-    "Dot": ". ",
-    "Number": "2",
+    "Dot": ".",
     "Name": "Carpaccio",
-    "Price": "$11.00",
-    "Sort": {
-      "Veggie": true,
-      "Fish": false,
-      "Drink": true,
-      "GlutenFree": false,
-      "Halal": false,
-      "Spicy": false
-    },
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": true,
+    "Fish": true,
+    "Drink": false,
+    "Price": " $11.00",
+    "Number": "2",
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n75 gr. groene pesto - 1 el. groene olijven zonder pit - zout,peper - 20 heel dunne plakjes ossenhaas - \n2 el. pijnboompitten - 40 gr. pecorino-kaas, dungeschaafd - basilicum"
   },
   {
-    "Dot": ". ",
-    "Number": "3",
+    "Dot": ".",
     "Name": "Huzarensalade",
-    "Price": "$9.50",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": true,
+    "Fish": false,
+    "Drink": false,
+    "Price": " $9.50",
+    "Number": "3",
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n125 gram magere spekreepjes -, 1/2 komkommer -, 1 bakje cherrytomaatjes -, \n4 scharreleieren M -, 1 zak sla-mix frisee a 200 gram -, 4 eetlepels slasaus naturel -, \n1 bak huzarensalade a 1000 gram -, 1 rode ui, gesnipperd -, 2 eetlepels fijngeknipt bieslook"
   },
   {
     "Name": "         Entremets",
-    "Number": null
+    "Number": null,
+    "Price": null
   },
   {
-    "Dot": ". ",
-    "Number": "4",
+    "Dot": ".",
     "Name": "Soep",
-    "Price": "$12.00",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": true,
+    "Fish": true,
+    "Drink": false,
+    "Price": " $12.00",
+    "Number": "4",
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n1 grote rode paprika, 1 sjalotje, 2 eetlepels olijfolie, 1 theelepel pizzakruiden, \neen halve liter kippenbouillon, vers gemalen peper, zout, eventueel citroensap, 150 gr. oesterzwammen, 2 eetlepels basilicumreepjes"
   },
   {
-    "Dot": ". ",
-    "Number": "5",
+    "Dot": ".",
     "Name": "Pasta",
-    "Price": "$13.00",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": true,
+    "Fish": false,
+    "Drink": false,
+    "Price": " $13.00",
+    "Number": "5",
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": true,
+    "Ingredients": "De Ingredienten zijn:\n400 gram penne - Plm. 400 gram gerookte kipfilet - 1 klein ui - 1 eetlepel olijfolie - \n1 eetlepel oregano - 1 glas witte wijn - 200 ml creme fraiche - 2 eetlepels rode pesto - 3 gedroogde tomaten (op olie) uitgelekt - 1 theelepel suiker"
   },
   {
-    "Dot": ". ",
-    "Number": "6",
+    "Dot": ".",
     "Name": "Eendenborst",
-    "Price": "$12.50",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": false,
+    "Fish": false,
+    "Drink": false,
+    "Price": " $12.50",
+    "Number": "6",
+    "GlutenFree": true,
+    "Halal": false,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n4 perssinaasappels, 2 el. vloeibare honing, 2 el. droge sherry, 2 tll ketjap asin, \n1 tl. kerriepoeder, \n2 tamme eendenborstfilets (ca. 600 gram), 2 grote handsinaasappels, 150 gram boter, zout, peper, 4 el. slagroom"
   },
   {
     "Name": "         Main Dishes",
-    "Number": null
+    "Number": null,
+    "Price": null
   },
   {
-    "Dot": ". ",
-    "Number": "7",
+    "Dot": ".",
     "Name": "Biefstuk met knoflookaardappeltjes",
-    "Price": "$12.00",
-    "Sort": [      
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": false,
+    "Fish": false,
+    "Drink": false,
+    "Price": " $12.00",
+    "Number": "7",
+    "GlutenFree": true,
+    "Halal": false,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n500 g krieltjes 2 preien 6 el olijfolie 50 g roomboter 3 tenen knoflook 390 g Ierse runderbiefstuk 2 el balsamicoazijn 85 g rucola 8 el mayonaise"
   },
   {
-    "Dot": ". ",
-    "Number": "8",
+    "Dot": ".",
     "Name": "Vis van de dag",
-    "Price": "$13.50",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": null,
+    "Fish": true,
+    "Drink": false,
+    "Price": " $13.50",
+    "Number": "8",
+    "GlutenFree": true,
+    "Halal": true,
+
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n800 g Karperfilet 150 g Selderie 250 g champignons 1 Knoflookteentje 200 ml Slagroom Zout, citroen, peper Bloem olijfolie 1 takje peterselie(blad)"
   },
   {
-    "Dot": ". ",
-    "Number": "9",
+    "Dot": ".",
     "Name": "Kibbeling",
-    "Price": "$11.00",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": null,
+    "Fish": false,
+    "Drink": false,
+    "Price": " $11.00",
+    "Number": "9",
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\nVoor de kibbeling: 500 g. kabeljauw- of schelvisfilet 2 el. bloem 4 el. melk 1 eiwit zout peper \nvoor de saus: 2 grote zoetzure augurken 1 ui ½ el. mosterd 125 ml mayonaise 125 ml crème fraîche 1 el. citroensap 1 el. kappertjes frituurolie viskruiden"
   },
   {
-    "Dot": ". ",
-    "Number": "10",
+    "Dot": ".",
     "Name": "Lasagne",
-    "Price": "$11.50",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": true,
+    "Fish": false,
+    "Drink": false,
+    "Price": " $11.50",
+    "Number": "10",
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n400 gr. kipfilet, 3 eetlepels pesto, 1 courgette, 200 gr. kastanjechampignons, 1 pakje gezeefde tomaten, \n1 teentje knoflook, 200 ml. creme fraiche, 4 tomaten, 150 gr. geraspte belegen kaas, 1 pakje lasagnevellen"
+
   },
   {
     "Name": "         Deserts",
-    "Number": null
+    "Number": null,
+    "Price": null
   },
   {
-    "Dot": ". ",
-    "Number": "11",
+    "Dot": ".",
     "Name": "Panna Cotta",
-    "Price": "$10.00",
-    "Sort": [
-      {
-        "Drink": true,
-        "Fish": false,
-        "GlutenFree": false,
-        "Halal": true,
-        "Spicy": true,
-        "Veggie": true
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": true,
+    "Fish": false,
+    "Drink": false,
+    "Price": " $10.00",
+    "Number": "11",
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n400 g aardbeien -2 el suiker -100 g rauwe rabarber voor de panna cotta : -1 l room -1 dl melk -75 g suiker \n-1 vanillepeul -4 blaadjes gelatine (in koud water geweekt) -240 g witte chocolade (in stukjes),"
   },
   {
-    "Dot": ". ",
+    "Dot": ".",
     "Name": "Bitterkoekjes",
-    "Price": "$9.00",
+    "Veggie": true,
+    "Fish": false,
+    "Drink": true,
+    "Price": " $9.00",
     "Number": "12",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n3 eieren, 200 gram boter, 3 eetlepels vloeibare honing, 200 gram haver vlokken, 200 gram boekweitmeel, \n200 gram gemalen amandelen, Boter om de bakplaat in te vetten en er komt een koffie of thee bij(naar keuze)"
   },
   {
-    "Dot": ". ",
+    "Dot": ".",
     "Name": "Kaasplateau",
+    "Veggie": true,
+    "Fish": false,
+    "Drink": false,
+    "Price": " $11.00",
     "Number": "13",
-    "Price": "$11.00",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "GlutenFree": true,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n200 gr. Deli Mosterdkaas, 200 gr. Kollummer, 200 gr. Riperkrite (Friese kruidenkaas), 200 gr. Groen-gele Maaslander, \n200 gr. Black Label, 200 gr. Kernhem Classique, 200 gr. Leidse Kanter belegen, 200 gr. Kernhem Chevre"
+
   },
   {
     "Name": "         Drinks",
-    "Number": null
+    "Number": null,
+    "Price": null
   },
   {
-    "Dot": ". ",
-    "Number": "14",
+    "Dot": ".",
     "Name": "Frisdrank/Soda",
-    "Price": "May vary",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": true,
+    "Fish": false,
+    "Drink": true,
+    "Price": " $5.00",
+    "Number": "14",
+    "GlutenFree": false,
+    "Halal": true,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\nCitroën, Theelepel bakpoeder, Suiker voor de smaak en Water."
   },
   {
-    "Dot": ". ",
-    "Number": "15",
+    "Dot": ".",
     "Name": "Wijn",
+    "Veggie": true,
+    "Fish": false,
+    "Drink": true,
     "Price": "May vary",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Number": " $10.00",
+    "GlutenFree": false,
+    "Halal": false,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\n8 kg. rijpe rode druiven, 1 sulfiet-tablet of sulfietpoeder. Wijnsteenzuur, indien nodig. Tafelsuiker of brouwsuiker1 pakje wijngist"
   },
   {
-    "Dot": ". ",
-    "Number": "16",
+    "Dot": ".",
     "Name": "Beer",
-    "Price": "May vary",
-    "Sort": [
-      {
-        "Veggie": true,
-        "Fish": false,
-        "Drink": true,
-        "GlutenFree": false,
-        "Halal": false,
-        "Spicy": false
-      }
-    ],
-    "Ingredients": "ingredients 123 idk for right now"
+    "Veggie": true,
+    "Fish": false,
+    "Drink": true,
+    "Price": " $7.00",
+    "Number": "16",
+    "GlutenFree": false,
+    "Halal": false,
+    "Spicy": false,
+    "Ingredients": "De Ingredienten zijn:\nGrain (mostly malted barley but also other grains)\nHops (grown in many different varieties)\nYeast (responsible for fermentation; based on style-specific strains)\nWater (accounts for up to 95 percent of beer’s content)"
   }
 ]
