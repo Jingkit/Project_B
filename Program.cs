@@ -62,6 +62,7 @@ namespace Main
                 if (x == "3") // Current Menu
                 {
                     CurrentMenuPage();
+                    continue;
                 }
                 if (x == "4") // FutureMenu
                 {
@@ -166,35 +167,6 @@ namespace Main
 
 
         }
-        static void MainMenu()
-        {
-            Console.WriteLine("1. Log in\n2. Current Menu\n3. Future Menu\n4. Information about the Restaurant\n5. Account\n6. Exit");
-            string x = Console.ReadLine();
-            if (x == "1")
-            {
-                LogIn();
-            }
-            if (x == "2")
-            {
-                CurrentMenuPage();
-            }
-            if (x == "3")
-            {
-                FutureMenu();
-            }
-            if (x == "4")
-            {
-                Info();
-            }
-            if (x == "5")
-            {
-
-            }
-            if (x == "6")
-            {
-                Exit();
-            }
-        }
         static void LogIn()
         {
             Console.WriteLine("Press a numberkey to choose option");
@@ -210,10 +182,14 @@ namespace Main
             {
                 Console.WriteLine(s.Number + s.Dot + s.Name);
             }
-            SortingMenu();
+            Console.WriteLine("Press s for the sorting page");
+            string choise = Console.ReadLine();
+            if (choise == "s")
+            {
+                SortingMenu();
+            }
 
         }
-
         static void SortingMenu()
         {
             var json = File.ReadAllText("details.json");
@@ -304,16 +280,9 @@ namespace Main
             else if (dish == "0")
             {
                 Console.WriteLine("\n\n");
-                MainMenu();
             }
-            Console.WriteLine("Please press Enter to go back.");
-            Console.ReadLine();
-            CurrentMenuPage();
+
         }
-
-
-
-
         static void FutureMenu()
         {
 
@@ -364,7 +333,7 @@ namespace Main
 
             if (dishNumber == 0)
             {
-                MainMenu();
+
             }
 
 
@@ -379,7 +348,7 @@ namespace Main
             string x = Console.ReadLine();
             if (x == "0")
             {
-                MainMenu();
+
             }
             else
             {

@@ -1,27 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ayubs\\source\\repos\\Jingkit\\Project_B\\Main.csproj": {}
+    "C:\\Project B\\github\\Project_B\\Main.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ayubs\\source\\repos\\Jingkit\\Project_B\\Main.csproj": {
+    "C:\\Project B\\github\\Project_B\\Main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ayubs\\source\\repos\\Jingkit\\Project_B\\Main.csproj",
+        "projectUniqueName": "C:\\Project B\\github\\Project_B\\Main.csproj",
         "projectName": "Main",
-        "projectPath": "C:\\Users\\ayubs\\source\\repos\\Jingkit\\Project_B\\Main.csproj",
-        "packagesPath": "C:\\Users\\ayubs\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ayubs\\source\\repos\\Jingkit\\Project_B\\obj\\",
+        "projectPath": "C:\\Project B\\github\\Project_B\\Main.csproj",
+        "packagesPath": "C:\\Users\\Jingk\\.nuget\\packages\\",
+        "outputPath": "C:\\Project B\\github\\Project_B\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ayubs\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Jingk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -48,7 +42,7 @@
           "dependencies": {
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[12.0.3, )"
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
@@ -66,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
