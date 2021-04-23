@@ -135,15 +135,11 @@ namespace Main
 
                         if (userNoInfo == false)
                         {
-                            dynamic infoDict = JsonConvert.DeserializeObject(File.ReadAllText($"{theUser}_info.json"));
-                            JToken name = infoDict.SelectToken("firstname");
-                            JToken lastname = infoDict.SelectToken("lastname");
-                            JToken email = infoDict.SelectToken("email");
-                            JToken number = infoDict.SelectToken("phone");
-                            string firstname = name.ToString();
-                            string surName = lastname.ToString();
-                            string mail = email.ToString();
-                            string phone = number.ToString();
+                            dynamic infoDict = JObject.Parse(File.ReadAllText($"{theUser}_info.json"));
+                            string firstname = infoDict.firstname;
+                            string surName = infoDict.lastname;
+                            string mail = infoDict.email;
+                            string phone = infoDict.phone;
                             UserInfo reserveInfo = new UserInfo(firstname, surName, mail, phone);
                             Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
                             Console.WriteLine("1. Next\n2. Cancel\n");
@@ -157,10 +153,32 @@ namespace Main
                                 continue;
                             }
                         }
+                        if (userNoInfo == true)
+                        {
+                            Console.WriteLine("Here comes the reservation system");
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        int seats = 30;
+                        Console.WriteLine("Day:\n1. Tuesday\n2. Wednesday\n3. Thursday\n4. Friday\n5. Saturday\n6. Sunday");
+                        string day = Console.ReadLine();
+                        Console.WriteLine("Time:");
+                        if (day == "1" || day == "2" || day == "3")
+                        {
+                            Console.WriteLine("(between 16:00 and 19:00)");
+                        }
                         else
                         {
-                            Console.WriteLine("Reserve table with no account");
+                            Console.WriteLine("(between 16:00 and 20:00)");
                         }
+                        day = day == "1" ? "Tuesday" : day == "2" ? "Wednesday" : day == "3" ? "Thursday" : day == "4" ? "Friday" : day == "5" ? "Saturday" : "Sunday";
+                        string time = Console.ReadLine();
+                        Console.WriteLine("Amount of people:");
+                        string people = Console.ReadLine();
+                        seats -= Int32.Parse(people);
+                        Console.WriteLine(seats);
                     }
                 }
             }
@@ -445,6 +463,7 @@ namespace Main
 
     class MainJson
     {
+        public dynamic parse;
 
         public void SerializeJson(json thething) // Gebruik deze method om een class die je maakt voor jouw eigen code om te zetten naar een json file
         {
@@ -470,10 +489,10 @@ namespace Main
             }
         }
 
-        public dynamic Parse(string text) 
+        public void Parse(string text) 
         {
             dynamic parse = JObject.Parse(text);
-            return parse;
+            this.parse = parse;
         }
     }
 }
