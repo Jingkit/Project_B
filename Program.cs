@@ -362,7 +362,7 @@ namespace Main
 
         public static void Register(Tuple<string, string> username) // Function to register an account using a tuple that consists of a username and password.
         {
-            using (StreamWriter text = new StreamWriter(File.Create($"C:\\{username.Item1}.json")))
+            using (StreamWriter text = new StreamWriter(File.Create($"{username.Item1}.json")))
             {
                 text.WriteLine(username.Item1);
                 text.WriteLine(username.Item2);
@@ -377,7 +377,7 @@ namespace Main
             string usernamecheck, passwordcheck = string.Empty;
             try
             {
-                using (StreamReader acc = new StreamReader(File.Open($"C:\\{username.Item1}.json", FileMode.Open)))
+                using (StreamReader acc = new StreamReader(File.Open($"{username.Item1}.json", FileMode.Open)))
                 {
                     usernamecheck = acc.ReadLine();
                     passwordcheck = acc.ReadLine();
@@ -443,4 +443,37 @@ namespace Main
         public string phone { get; set; }
     }
 
+    class MainJson
+    {
+
+        public void SerializeJson(json thething) // Gebruik deze method om een class die je maakt voor jouw eigen code om te zetten naar een json file
+        {
+            string text = JsonConvert.SerializeObject(thething);
+            Console.Write("Enter File name: ");
+            string filename = Console.ReadLine();
+            File.WriteAllText($"{filename}.json", text);
+        }
+
+        public void DeserializeJson(string text)
+        {
+            dynamic json = JsonConvert.DeserializeObject(text); // Gebruik deze method om de values van de json bestand te printen, dit kan je gaan veranderen door een child class te maken en deze method te overwriten.
+                                                                // Zo kan je bijvoorbeeld inplaats van Console.WriteLine(), iets returnen met de values erin.
+            foreach (var key in json)
+            {
+                Console.WriteLine(key);
+                //Console.WriteLine(key) werkt ook, maar dan krijg je "key" : "value" ("firstname" : "test") uitgeprint. Dat kan handig zijn.
+                foreach (var variable in key)
+                {
+                    Console.WriteLine(variable);
+                }
+
+            }
+        }
+
+        public dynamic Parse(string text) 
+        {
+            dynamic parse = JObject.Parse(text);
+            return parse;
+        }
+    }
 }
