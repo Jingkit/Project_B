@@ -3,6 +3,8 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Net.Mail;
+using System.Net;
 
 namespace Main
 {
@@ -142,11 +144,48 @@ namespace Main
                             string phone = infoDict.phone;
                             UserInfo reserveInfo = new UserInfo(firstname, surName, mail, phone);
                             Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
-                            Console.WriteLine("1. Next\n2. Cancel\n");
+                            Console.WriteLine("1. Confirm\n2. Cancel\n");
                             string input = Console.ReadLine();
                             if (input == "1")
                             {
-                                Console.WriteLine("Seat choice etc.");
+                                Random generator = new Random();
+                                int randomNumber = generator.Next(100000, 999999);
+                                string read = File.ReadAllText("allCodeNumbers.json");
+                                dynamic deserialize = JObject.Parse(read);
+                                List<int> allCodes = new List<int>();
+                                foreach (var number in deserialize.reservationCode)
+                                {
+                                    allCodes.Add((int)number);
+                                }
+
+                                while (allCodes.Contains(randomNumber))
+                                {
+                                    randomNumber = generator.Next(100000, 999999);
+                                }
+
+                                allCodes.Add(randomNumber);
+
+                                Code code = new Code { reservationCode = allCodes };
+                                string json = JsonConvert.SerializeObject(code, Formatting.Indented);
+                                File.WriteAllText("allCodeNumbers.json", json);
+                                SmtpClient sentMail = new SmtpClient("smtp-mail.outlook.com", 587);
+                                sentMail.EnableSsl = true;
+                                sentMail.UseDefaultCredentials = false;
+                                sentMail.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                sentMail.Credentials = new NetworkCredential("1003967@hr.nl", "b2b256d1");
+
+                                try
+                                {
+                                    sentMail.Send("1003967@hr.nl", $"{reserveInfo.email}", "Reservation code", $"Thank you for making a reservation at our restaurant!\n\nYour Reservation Code is:\t{randomNumber}");
+                                    Console.WriteLine("Email sent");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Error: " + ex.Message);
+                                }
+
+                                Console.WriteLine($"Reservation successful!\n\nAn email with the reservation code has been sent to {reserveInfo.email}.\n\nPress enter to return.");
+                                Console.ReadLine();
                             }
                             if (input == "2")
                             {
@@ -494,5 +533,9 @@ namespace Main
             dynamic parse = JObject.Parse(text);
             this.parse = parse;
         }
+    }
+    class Code
+    {
+        public List<int> reservationCode { get; set; }
     }
 }
