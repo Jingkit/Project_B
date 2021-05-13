@@ -122,7 +122,7 @@ namespace Main
                 if (x == "2")
                 {
                     if (theUser != "")
-                    {
+                    {                      
                         string info;
                         bool userNoInfo = true;
                         try
@@ -137,6 +137,7 @@ namespace Main
 
                         if (userNoInfo == false)
                         {
+                            Console.Write("\nConfirm Personal Information\n\n");
                             dynamic infoDict = JObject.Parse(File.ReadAllText($"{theUser}_info.json"));
                             string firstname = infoDict.firstname;
                             string surName = infoDict.lastname;
@@ -147,45 +148,9 @@ namespace Main
                             Console.WriteLine("1. Confirm\n2. Cancel\n");
                             string input = Console.ReadLine();
                             if (input == "1")
-                            {
-                                Random generator = new Random();
-                                int randomNumber = generator.Next(100000, 999999);
-                                string read = File.ReadAllText("allCodeNumbers.json");
-                                dynamic deserialize = JObject.Parse(read);
-                                List<int> allCodes = new List<int>();
-                                foreach (var number in deserialize.reservationCode)
-                                {
-                                    allCodes.Add((int)number);
-                                }
-
-                                while (allCodes.Contains(randomNumber))
-                                {
-                                    randomNumber = generator.Next(100000, 999999);
-                                }
-
-                                allCodes.Add(randomNumber);
-
-                                Code code = new Code { reservationCode = allCodes };
-                                string json = JsonConvert.SerializeObject(code, Formatting.Indented);
-                                File.WriteAllText("allCodeNumbers.json", json);
-                                SmtpClient sentMail = new SmtpClient("smtp-mail.outlook.com", 587);
-                                sentMail.EnableSsl = true;
-                                sentMail.UseDefaultCredentials = false;
-                                sentMail.DeliveryMethod = SmtpDeliveryMethod.Network;
-                                sentMail.Credentials = new NetworkCredential("1003967@hr.nl", "b2b256d1");
-
-                                try
-                                {
-                                    sentMail.Send("1003967@hr.nl", $"{reserveInfo.email}", "Reservation code", $"Thank you for making a reservation at our restaurant!\n\nYour Reservation Code is:\t{randomNumber}");
-                                    Console.WriteLine("Email sent");
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine("Error: " + ex.Message);
-                                }
-
-                                Console.WriteLine($"Reservation successful!\n\nAn email with the reservation code has been sent to {reserveInfo.email}.\n\nPress enter to return.");
-                                Console.ReadLine();
+                            {                            
+                                ReserveTable();
+                                SentEmail(reserveInfo);
                             }
                             if (input == "2")
                             {
@@ -194,30 +159,56 @@ namespace Main
                         }
                         if (userNoInfo == true)
                         {
-                            Console.WriteLine("Here comes the reservation system");
-                            continue;
+                            Console.WriteLine("\nEnter Personal Information\n\n");
+                            Console.Write("First name:\t");
+                            string firstname = Console.ReadLine();
+                            Console.Write("Last name:\t");
+                            string lastname = Console.ReadLine();
+                            Console.Write("Email:\t\t");
+                            string email = Console.ReadLine();
+                            Console.Write("Phone number:\t");
+                            string phoneNumber = Console.ReadLine();
+                            Console.WriteLine("\n\n");
+                            UserInfo reserveInfo = new UserInfo(firstname, lastname, email, phoneNumber);
+                            Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
+                            Console.WriteLine("1. Confirm\n2. Cancel\n");
+                            string input = Console.ReadLine();
+                            if (input == "1")
+                            {                            
+                                ReserveTable();
+                                SentEmail(reserveInfo);
+                            }
+                            if (input == "2")
+                            {
+                                continue;
+                            }
                         }
                     }
                     else
                     {
-                        int seats = 30;
-                        Console.WriteLine("Day:\n1. Tuesday\n2. Wednesday\n3. Thursday\n4. Friday\n5. Saturday\n6. Sunday");
-                        string day = Console.ReadLine();
-                        Console.WriteLine("Time:");
-                        if (day == "1" || day == "2" || day == "3")
+                        Console.WriteLine("\nEnter Personal Information\n\n");
+                        Console.Write("First name:\t");
+                        string firstname = Console.ReadLine();
+                        Console.Write("Last name:\t");
+                        string lastname = Console.ReadLine();
+                        Console.Write("Email:\t\t");
+                        string email = Console.ReadLine();
+                        Console.Write("Phone number:\t");
+                        string phoneNumber = Console.ReadLine();
+                        Console.WriteLine("\n\n");
+                        UserInfo reserveInfo = new UserInfo(firstname, lastname, email, phoneNumber);
+                        Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
+                        Console.WriteLine("1. Confirm\n2. Cancel\n");
+                        string input = Console.ReadLine();
+                        if (input == "1")
                         {
-                            Console.WriteLine("(between 16:00 and 19:00)");
+                            ReserveTable();
+                            SentEmail(reserveInfo);
                         }
-                        else
+                        if (input == "2")
                         {
-                            Console.WriteLine("(between 16:00 and 20:00)");
+                            continue;
                         }
-                        day = day == "1" ? "Tuesday" : day == "2" ? "Wednesday" : day == "3" ? "Thursday" : day == "4" ? "Friday" : day == "5" ? "Saturday" : "Sunday";
-                        string time = Console.ReadLine();
-                        Console.WriteLine("Amount of people:");
-                        string people = Console.ReadLine();
-                        seats -= Int32.Parse(people);
-                        Console.WriteLine(seats);
                     }
                 }
             }
@@ -239,7 +230,7 @@ namespace Main
             {
                 Console.WriteLine(s.Number + s.Dot + s.Name);
             }
-            Console.WriteLine("Press s for the sorting page");
+            Console.WriteLine("Press s for the option to view dish details or to sort dishes");
             string choise = Console.ReadLine();
             if (choise == "s")
             {
@@ -258,85 +249,87 @@ namespace Main
             var dish = Console.ReadLine();
             var n = dish;
             List<string> list = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "0", "v", "g", "h", "b", "s" };
-
-            if (!list.Contains(n))
+            while(dish != "0")
             {
-                Console.WriteLine("There is no such dish or command");
-            }
-            else if (dish == "v")
-            {
-                Console.WriteLine("These are the vegetarian options:\n");
-                foreach (var s in stuff)
+                if (!list.Contains(n))
                 {
-                    if (s.Veggie == true)
+                    Console.WriteLine("There is no such dish or command");
+                }
+                else if (dish == "v")
+                {
+                    Console.WriteLine("These are the vegetarian options:\n");
+                    foreach (var s in stuff)
                     {
-                        string vegdishes = s.Number + s.Dot + s.Name + s.Price;
-                        Console.WriteLine(vegdishes);
+                        if (s.Veggie == true)
+                        {
+                            string vegdishes = s.Number + s.Dot + s.Name + s.Price;
+                            Console.WriteLine(vegdishes);
+                        }
                     }
                 }
-            }
-            else if (dish == "s")
-            {
-                Console.WriteLine("These are the vegetarian options:\n");
-                foreach (var s in stuff)
+                else if (dish == "s")
                 {
-                    if (s.Spicy == true)
+                    Console.WriteLine("These are the vegetarian options:\n");
+                    foreach (var s in stuff)
                     {
-                        string spicedishes = s.Number + s.Dot + s.Name;
-                        Console.WriteLine(spicedishes);
+                        if (s.Spicy == true)
+                        {
+                            string spicedishes = s.Number + s.Dot + s.Name;
+                            Console.WriteLine(spicedishes);
+                        }
                     }
                 }
-            }
-            else if (dish == "g")
-            {
-                Console.WriteLine("These are the glutenfree options:\n");
-                foreach (var s in stuff)
+                else if (dish == "g")
                 {
-                    if (s.GlutenFree == true)
+                    Console.WriteLine("These are the glutenfree options:\n");
+                    foreach (var s in stuff)
                     {
-                        string glfrdishes = s.Number + s.Dot + s.Name;
-                        Console.WriteLine(glfrdishes);
+                        if (s.GlutenFree == true)
+                        {
+                            string glfrdishes = s.Number + s.Dot + s.Name;
+                            Console.WriteLine(glfrdishes);
+                        }
                     }
                 }
-            }
-            else if (dish == "h")
-            {
-                Console.WriteLine("These are the Halal options:\n");
-                foreach (var s in stuff)
+                else if (dish == "h")
                 {
-                    Console.WriteLine(s.Number + s.Dot + s.Name);
-                    if (s.Halal == true)
+                    Console.WriteLine("These are the Halal options:\n");
+                    foreach (var s in stuff)
                     {
-                        string halaldishes = s.Number + s.Dot + s.Name;
-                        Console.WriteLine(halaldishes);
+                        Console.WriteLine(s.Number + s.Dot + s.Name);
+                        if (s.Halal == true)
+                        {
+                            string halaldishes = s.Number + s.Dot + s.Name;
+                            Console.WriteLine(halaldishes);
+                        }
                     }
                 }
-            }
-            else if (dish == "b")// if b is ur inpu, there will be a list of the dishes that are both vegetarian and glutenfree
-            {
-                Console.WriteLine("These are the vegeterian glutenfree options:\n");
-                foreach (var s in stuff)
+                else if (dish == "b")// if b is ur inpu, there will be a list of the dishes that are both vegetarian and glutenfree
                 {
-                    if (s.GlutenFree == true && s.Veggie == true)
+                    Console.WriteLine("These are the vegeterian glutenfree options:\n");
+                    foreach (var s in stuff)
                     {
-                        string bothdish = s.Number + s.Dot + s.Name;
-                        Console.WriteLine(bothdish);
+                        if (s.GlutenFree == true && s.Veggie == true)
+                        {
+                            string bothdish = s.Number + s.Dot + s.Name;
+                            Console.WriteLine(bothdish);
+                        }
                     }
                 }
-            }
-            else if (dish == n && dish != "0")// n is the number you input, and here it will show the details for the specific dishes 
-            {
-                foreach (var s in stuff)
+                else if (dish == n && dish != "0")// n is the number you input, and here it will show the details for the specific dishes 
                 {
-                    if (s.Number == n)
+                    foreach (var s in stuff)
                     {
-                        Console.WriteLine("\n" + s.Name + s.Dot + s.Price + "\n" + s.Ingredients);
+                        if (s.Number == n)
+                        {
+                            Console.WriteLine("\n" + s.Name + s.Dot + s.Price + "\n" + s.Ingredients);
+                        }
                     }
                 }
-            }
-            else if (dish == "0")
-            {
-                Console.WriteLine("\n\n");
+                Console.WriteLine("\nPlease press the number of the dish you want to know more information about.\n" +
+                                  "Or press 'v' to sort for vegetarian dishes, 'g' for glutenfree, 'h' for halal food, s for spicy and \n'0' to go back to the Main menu");
+                dish = Console.ReadLine();
+                n = dish;
             }
 
         }
@@ -398,9 +391,9 @@ namespace Main
         }
         static void Info()
         {
-            Console.WriteLine("_________________________\n\nOpening Hours\n\nMonday:     CLOSED\nTuesday:    16:00-20:00\n" +
-            "Wednesday:  16:00-20:00\nThursday:   16:00-20:00\nFriday:     16:00-21:00\nSatuday:    16:00-21:00\nSunday:     " +
-            "16:00-21:00\n_________________________\n\nContact Us\n\nPhone Number: 071-5119113\n_________________________\n");
+            Console.WriteLine("_________________________\n\nOpening Hours\n\nMonday:     CLOSED\nTuesday:    16:00-22:00\n" +
+            "Wednesday:  16:00-22:00\nThursday:   16:00-22:00\nFriday:     16:00-22:00\nSatuday:    16:00-22:00\nSunday:     " +
+            "16:00-22:00\n_________________________\n\nContact Us\n\nPhone Number: 071-5119113\n_________________________\n");
             Console.WriteLine("0. Previous Page");
             string x = Console.ReadLine();
             if (x == "0")
@@ -475,6 +468,733 @@ namespace Main
         {
 
         }
+        public static Dictionary<string, bool> SetupTable(Table data)
+        {
+            var result = new Dictionary<string, bool>();
+            result["Table 1"] = data.Table1;
+            result["Table 2"] = data.Table2;
+            result["Table 3"] = data.Table3;
+            result["Table 4"] = data.Table4;
+            result["Table 5"] = data.Table5;
+            result["Table 6"] = data.Table6;
+            result["Table 7"] = data.Table7;
+            result["Table 8"] = data.Table8;
+            result["Table 9"] = data.Table9;
+            result["Table 10"] = data.Table10;
+            return result;
+        }
+        public static Table chosenDayTime(string day, string time, ReservationData table)
+        {
+            if (day == "1")
+            {
+                if (time == "1")
+                {
+                    return table.Tuesday.Four;
+                }
+                else if (time == "2")
+                {
+                    return table.Tuesday.Six;
+                }
+                else if (time == "3")
+                {
+                    return table.Tuesday.Eight;
+                }
+            }
+            if (day == "2")
+            {
+                if (time == "1")
+                {
+                    return table.Wednesday.Four;
+                }
+                else if (time == "2")
+                {
+                    return table.Wednesday.Six;
+                }
+                else if (time == "3")
+                {
+                    return table.Wednesday.Eight;
+                }
+            }
+            if (day == "3")
+            {
+                if (time == "1")
+                {
+                    return table.Thursday.Four;
+                }
+                else if (time == "2")
+                {
+                    return table.Thursday.Six;
+                }
+                else if (time == "3")
+                {
+                    return table.Thursday.Eight;
+                }
+            }
+            if (day == "4")
+            {
+                if (time == "1")
+                {
+                    return table.Friday.Four;
+                }
+                else if (time == "2")
+                {
+                    return table.Friday.Six;
+                }
+                else if (time == "3")
+                {
+                    return table.Friday.Eight;
+                }
+            }
+            if (day == "5")
+            {
+                if (time == "1")
+                {
+                    return table.Saturday.Four;
+                }
+                else if (time == "2")
+                {
+                    return table.Saturday.Six;
+                }
+                else if (time == "3")
+                {
+                    return table.Saturday.Eight;
+                }
+            }
+            if (day == "6")
+            {
+                if (time == "1")
+                {
+                    return table.Sunday.Four;
+                }
+                else if (time == "2")
+                {
+                    return table.Sunday.Six;
+                }
+                else if (time == "3")
+                {
+                    return table.Sunday.Eight;
+                }
+            }
+            return null;
+        }
+
+        public static string ConfirmationText(string week, string day, string time)
+        {
+            if (week == "1")
+            {
+                if (day == "1")
+                {
+                    if (time == "1")
+                    {
+                        return "This weeks Tuesday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "This weeks Tuesday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "This weeks Tuesday at 20:00";
+                    }
+                }
+                if (day == "2")
+                {
+                    if (time == "1")
+                    {
+                        return "This weeks Wednesday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "This weeks Wednesday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "This weeks Wednesday at 20:00";
+                    }
+                }
+                if (day == "3")
+                {
+                    if (time == "1")
+                    {
+                        return "This weeks Thursday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "This weeks Thursday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "This weeks Thursday at 20:00";
+                    }
+                }
+                if (day == "4")
+                {
+                    if (time == "1")
+                    {
+                        return "This weeks Friday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "This weeks Friday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "This weeks Friday at 20:00";
+                    }
+                }
+                if (day == "5")
+                {
+                    if (time == "1")
+                    {
+                        return "This weeks Saturday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "This weeks Saturday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "This weeks Saturday at 20:00";
+                    }
+                }
+                if (day == "6")
+                {
+                    if (time == "1")
+                    {
+                        return "This weeks Sunday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "This weeks Sunday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "This weeks Sunday at 20:00";
+                    }
+                }
+            }
+            if (week == "2")
+            {
+                if (day == "1")
+                {
+                    if (time == "1")
+                    {
+                        return "Next weeks Tuesday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "Next weeks Tuesday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "Next weeks Tuesday at 20:00";
+                    }
+                }
+                if (day == "2")
+                {
+                    if (time == "1")
+                    {
+                        return "Next weeks Wednesday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "Next weeks Wednesday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "Next weeks Wednesday at 20:00";
+                    }
+                }
+                if (day == "3")
+                {
+                    if (time == "1")
+                    {
+                        return "Next weeks Thursday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "Next weeks Thursday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "Next weeks Thursday at 20:00";
+                    }
+                }
+                if (day == "4")
+                {
+                    if (time == "1")
+                    {
+                        return "Next weeks Friday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "Next weeks Friday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "Next weeks Friday at 20:00";
+                    }
+                }
+                if (day == "5")
+                {
+                    if (time == "1")
+                    {
+                        return "Next weeks Saturday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "Next weeks Saturday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "Next weeks Saturday at 20:00";
+                    }
+                }
+                if (day == "6")
+                {
+                    if (time == "1")
+                    {
+                        return "Next weeks Sunday at 16:00";
+                    }
+                    if (time == "2")
+                    {
+                        return "Next weeks Sunday at 18:00";
+                    }
+                    if (time == "3")
+                    {
+                        return "Next weeks Sunday at 20:00";
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static void EditTableData(string day, string time, Dictionary<string, bool> dict, ReservationData tableinfo)
+        {
+            if (day == "1")
+            {
+                if (time == "1")
+                {
+                    tableinfo.Tuesday.Four = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "2")
+                {
+                    tableinfo.Tuesday.Six = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "3")
+                {
+                    tableinfo.Tuesday.Eight = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+            }
+            if (day == "2")
+            {
+                if (time == "1")
+                {
+                    tableinfo.Wednesday.Four = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "2")
+                {
+                    tableinfo.Wednesday.Six = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "3")
+                {
+                    tableinfo.Wednesday.Eight = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+            }
+            if (day == "3")
+            {
+                if (time == "1")
+                {
+                    tableinfo.Thursday.Four = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "2")
+                {
+                    tableinfo.Thursday.Six = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "3")
+                {
+                    tableinfo.Thursday.Eight = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+            }
+            if (day == "4")
+            {
+                if (time == "1")
+                {
+                    tableinfo.Friday.Four = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "2")
+                {
+                    tableinfo.Friday.Six = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "3")
+                {
+                    tableinfo.Friday.Eight = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+            }
+            if (day == "5")
+            {
+                if (time == "1")
+                {
+                    tableinfo.Saturday.Four = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "2")
+                {
+                    tableinfo.Saturday.Six = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "3")
+                {
+                    tableinfo.Saturday.Eight = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+            }
+            if (day == "6")
+            {
+                if (time == "1")
+                {
+                    tableinfo.Sunday.Four = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "2")
+                {
+                    tableinfo.Sunday.Six = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+                else if (time == "3")
+                {
+                    tableinfo.Sunday.Eight = new Table()
+                    {
+                        Table1 = dict["Table 1"],
+                        Table2 = dict["Table 2"],
+                        Table3 = dict["Table 3"],
+                        Table4 = dict["Table 4"],
+                        Table5 = dict["Table 5"],
+                        Table6 = dict["Table 6"],
+                        Table7 = dict["Table 7"],
+                        Table8 = dict["Table 8"],
+                        Table9 = dict["Table 9"],
+                        Table10 = dict["Table 10"]
+                    };
+                }
+            }
+
+        }
+
+        public static void ReserveTable()
+        {
+            string holder = "";
+            ReservationData tableData = null;
+            Console.WriteLine("Reserve Table\n1. This week\n2. Next week\n");
+            string week = Console.ReadLine();
+            if (week == "1")
+            {
+                holder = File.ReadAllText("This Week Table Info.json");
+                tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
+
+            }
+            else if (week == "2")
+            {
+                holder = File.ReadAllText("Next Week Table Info.json");
+                tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
+            }
+            Console.WriteLine("Pick a day\nMonday CLOSED\n1. Tuesday\n2. Wednesday\n3. Thursday\n4. Friday\n5. Saturday\n6. Sunday");
+            string day = Console.ReadLine();
+            Console.WriteLine("Pick a time\n1. 16:00\n2. 18:00\n3. 20:00");
+            string time = Console.ReadLine();
+            //CultureInfo language = new CultureInfo("en-US");
+            //var shortDate = DateTime.Now.ToString("dddd", language);
+            //Console.WriteLine(shortDate);
+            var reservationDay = chosenDayTime(day, time, tableData);
+            var tableAvailability = SetupTable(reservationDay);
+
+            Console.WriteLine("Pick an available table number");
+
+            foreach (var table in tableAvailability)
+            {
+                string available;
+                if (table.Value == true)
+                {
+                    available = " is not available";
+                }
+                else
+                {
+                    available = " is available";
+                }
+                Console.WriteLine(table.Key + available);
+            }
+            string pick = Console.ReadLine();
+            string confirmation = ConfirmationText(week, day, time);
+            Console.WriteLine($"\nConfirm Reservation\n\nYou want to reservere a table on:\n" + confirmation + $"\nTable {pick}\n\n1. Confirm\n2. Cancel\n");
+            confirmation = Console.ReadLine();
+            if (confirmation == "1")
+            {
+                if (tableAvailability["Table " + pick] == false)
+                {
+                    tableAvailability["Table " + pick] = true;
+
+                }
+                else
+                {
+                    Console.WriteLine("This table is not available.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("You have cancelled the reservation");
+            }
+
+            EditTableData(day, time, tableAvailability, tableData);
+            var file = JsonConvert.SerializeObject(tableData, Formatting.Indented);
+            if (week == "1")
+            {
+                File.WriteAllText("This Week Table Info.json", file);
+            }
+            else if (week == "2")
+            {
+                File.WriteAllText("Next Week Table Info.json", file);
+            }
+        }
+        public static void SentEmail(UserInfo reserveInfo)
+        {
+            Random generator = new Random();
+            int randomNumber = generator.Next(100000, 999999);
+            string read = File.ReadAllText("allCodeNumbers.json");
+            dynamic deserialize = JObject.Parse(read);
+            List<int> allCodes = new List<int>();
+            foreach (var number in deserialize.reservationCode)
+            {
+                allCodes.Add((int)number);
+            }
+
+            while (allCodes.Contains(randomNumber))
+            {
+                randomNumber = generator.Next(100000, 999999);
+            }
+
+            allCodes.Add(randomNumber);
+
+            Code code = new Code { reservationCode = allCodes };
+            string json = JsonConvert.SerializeObject(code, Formatting.Indented);
+            File.WriteAllText("allCodeNumbers.json", json);
+            SmtpClient sentMail = new SmtpClient("smtp-mail.outlook.com", 587);
+            sentMail.EnableSsl = true;
+            sentMail.UseDefaultCredentials = false;
+            sentMail.DeliveryMethod = SmtpDeliveryMethod.Network;
+            sentMail.Credentials = new NetworkCredential("1003967@hr.nl", "b2b256d1");
+
+            try
+            {
+                sentMail.Send("1003967@hr.nl", $"{reserveInfo.email}", "Reservation code", $"Thank you for making a reservation at our restaurant!\n\nYour Reservation Code is:\t{randomNumber}");
+                Console.WriteLine("Email sent");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            Console.WriteLine($"Reservation successful!\n\nAn email with the reservation code has been sent to {reserveInfo.email}.\n\nPress enter to return.");
+            Console.ReadLine();
+        }
     }
     public class UserInfo
     {
@@ -533,9 +1253,39 @@ namespace Main
             dynamic parse = JObject.Parse(text);
             this.parse = parse;
         }
+
     }
     class Code
     {
         public List<int> reservationCode { get; set; }
+    }
+    class ReservationData
+    {
+        public Time Tuesday { get; set; }
+        public Time Wednesday { get; set; }
+        public Time Thursday { get; set; }
+        public Time Friday { get; set; }
+        public Time Saturday { get; set; }
+        public Time Sunday { get; set; }
+
+    }
+    class Time
+    {
+        public Table Four { get; set; }
+        public Table Six { get; set; }
+        public Table Eight { get; set; }
+    }
+    class Table
+    {
+        public bool Table1 { get; set; }
+        public bool Table2 { get; set; }
+        public bool Table3 { get; set; }
+        public bool Table4 { get; set; }
+        public bool Table5 { get; set; }
+        public bool Table6 { get; set; }
+        public bool Table7 { get; set; }
+        public bool Table8 { get; set; }
+        public bool Table9 { get; set; }
+        public bool Table10 { get; set; }
     }
 }
