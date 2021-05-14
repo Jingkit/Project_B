@@ -1,236 +1,230 @@
 {
   "Tuesday": {
-    "16:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Four": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-    "18:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Six": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-
-    "20:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Eight": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     }
   },
   "Wednesday": {
-    "16:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Four": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-    "18:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Six": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-
-    "20:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Eight": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     }
   },
   "Thursday": {
-    "16:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Four": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-    "18:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Six": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-
-    "20:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Eight": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     }
   },
   "Friday": {
-    "16:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Four": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-    "18:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Six": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-
-    "20:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Eight": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     }
   },
   "Saturday": {
-    "16:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Four": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-    "18:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Six": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-
-    "20:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Eight": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     }
   },
   "Sunday": {
-    "16:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Four": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-    "18:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Six": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     },
-
-    "20:00": {
-      "Table 1": false,
-      "Table 2": false,
-      "Table 3": false,
-      "Table 4": false,
-      "Table 5": false,
-      "Table 6": false,
-      "Table 7": false,
-      "Table 8": false,
-      "Table 9": false,
-      "Table 10": false
+    "Eight": {
+      "Table1": false,
+      "Table2": false,
+      "Table3": false,
+      "Table4": false,
+      "Table5": false,
+      "Table6": false,
+      "Table7": false,
+      "Table8": false,
+      "Table9": false,
+      "Table10": false
     }
   }
 }
