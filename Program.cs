@@ -12,11 +12,11 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            string theUser = "";
+            string theUser = ""; // User is NIET ingelogd
             bool stopProgram = false;
             while (stopProgram == false)
             {
-                Console.WriteLine("1. Log in\n2. Reserve table\n3. Current Menu\n4. Future Menu\n5. Information about the Restaurant\n6. Account\n7. Admin\n8. Exit\n");
+                Console.WriteLine("1. Log in\n2. Reserve table/Change Reservation\n3. Current Menu\n4. Future Menu\n5. Information about the Restaurant\n6. Account\n7. Admin\n8. Exit\n");
                 string x = Console.ReadLine();
                 if (x == "1") // Login 
                 {
@@ -121,43 +121,74 @@ namespace Main
                 }
                 if (x == "2")
                 {
-                    if (theUser != "")
-                    {                      
-                        string info;
-                        bool userNoInfo = true;
-                        try
-                        {
-                            info = File.ReadAllText($"{theUser}_info.json");
-                            userNoInfo = false;
-                        }
-                        catch (FileNotFoundException)
-                        {
-                            userNoInfo = true;
-                        }
-
-                        if (userNoInfo == false)
-                        {
-                            Console.Write("\nConfirm Personal Information\n\n");
-                            dynamic infoDict = JObject.Parse(File.ReadAllText($"{theUser}_info.json"));
-                            string firstname = infoDict.firstname;
-                            string surName = infoDict.lastname;
-                            string mail = infoDict.email;
-                            string phone = infoDict.phone;
-                            UserInfo reserveInfo = new UserInfo(firstname, surName, mail, phone);
-                            Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
-                            Console.WriteLine("1. Confirm\n2. Cancel\n");
-                            string input = Console.ReadLine();
-                            if (input == "1")
-                            {                            
-                                ReserveTable();
-                                SentEmail(reserveInfo);
-                            }
-                            if (input == "2")
+                    Console.WriteLine("1. Reserve Table\n2. Change Reservation");
+                    var option = Console.ReadLine();
+                    if(option == "1")
+                    {
+                        if (theUser != "") // User is WEL ingelogd
+                        {                      
+                            string info;
+                            bool userNoInfo = true;
+                            try
                             {
-                                continue;
+                                info = File.ReadAllText($"{theUser}_info.json");
+                                userNoInfo = false;
+                            }
+                            catch (FileNotFoundException)
+                            {
+                                userNoInfo = true;
+                            }
+
+                            if (userNoInfo == false)
+                            {
+                                Console.Write("\nConfirm Personal Information\n\n");
+                                dynamic infoDict = JObject.Parse(File.ReadAllText($"{theUser}_info.json"));
+                                string firstname = infoDict.firstname;
+                                string surName = infoDict.lastname;
+                                string mail = infoDict.email;
+                                string phone = infoDict.phone;
+                                UserInfo reserveInfo = new UserInfo(firstname, surName, mail, phone);
+                                Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
+                                Console.WriteLine("1. Confirm\n2. Cancel\n");
+                                string input = Console.ReadLine();
+                                if (input == "1")
+                                {                            
+                                    ReserveTable(reserveInfo.firstname);
+                                    SentEmail(reserveInfo);
+                                }
+                                if (input == "2")
+                                {
+                                    continue;
+                                }
+                            }
+                            if (userNoInfo == true)
+                            {
+                                Console.WriteLine("\nEnter Personal Information\n\n");
+                                Console.Write("First name:\t");
+                                string firstname = Console.ReadLine();
+                                Console.Write("Last name:\t");
+                                string lastname = Console.ReadLine();
+                                Console.Write("Email:\t\t");
+                                string email = Console.ReadLine();
+                                Console.Write("Phone number:\t");
+                                string phoneNumber = Console.ReadLine();
+                                Console.WriteLine("\n\n");
+                                UserInfo reserveInfo = new UserInfo(firstname, lastname, email, phoneNumber);
+                                Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
+                                Console.WriteLine("1. Confirm\n2. Cancel\n");
+                                string input = Console.ReadLine();
+                                if (input == "1")
+                                {                            
+                                    ReserveTable(reserveInfo.firstname);
+                                    SentEmail(reserveInfo);
+                                }
+                                if (input == "2")
+                                {
+                                    continue;
+                                }
                             }
                         }
-                        if (userNoInfo == true)
+                        else
                         {
                             Console.WriteLine("\nEnter Personal Information\n\n");
                             Console.Write("First name:\t");
@@ -174,41 +205,20 @@ namespace Main
                             Console.WriteLine("1. Confirm\n2. Cancel\n");
                             string input = Console.ReadLine();
                             if (input == "1")
-                            {                            
-                                ReserveTable();
+                            {
+                                ReserveTable(reserveInfo.firstname);
                                 SentEmail(reserveInfo);
                             }
                             if (input == "2")
                             {
                                 continue;
                             }
-                        }
                     }
-                    else
+
+                    }
+                    else if(option == "2")
                     {
-                        Console.WriteLine("\nEnter Personal Information\n\n");
-                        Console.Write("First name:\t");
-                        string firstname = Console.ReadLine();
-                        Console.Write("Last name:\t");
-                        string lastname = Console.ReadLine();
-                        Console.Write("Email:\t\t");
-                        string email = Console.ReadLine();
-                        Console.Write("Phone number:\t");
-                        string phoneNumber = Console.ReadLine();
-                        Console.WriteLine("\n\n");
-                        UserInfo reserveInfo = new UserInfo(firstname, lastname, email, phoneNumber);
-                        Console.WriteLine($"First name: \t{reserveInfo.firstname}\nLast name: \t{reserveInfo.lastname}\nEmail: \t\t{reserveInfo.email}\nPhone number: \t{reserveInfo.phone}\n");
-                        Console.WriteLine("1. Confirm\n2. Cancel\n");
-                        string input = Console.ReadLine();
-                        if (input == "1")
-                        {
-                            ReserveTable();
-                            SentEmail(reserveInfo);
-                        }
-                        if (input == "2")
-                        {
-                            continue;
-                        }
+                        //Zet hier code voor Change Reservation
                     }
                 }
                 if (x == "7")
@@ -486,9 +496,9 @@ namespace Main
         {
 
         }
-        public static Dictionary<string, bool> SetupTable(Table data)
+        public static Dictionary<string, string> SetupTable(Table data)
         {
-            var result = new Dictionary<string, bool>();
+            var result = new Dictionary<string, string>();
             result["Table 1"] = data.Table1;
             result["Table 2"] = data.Table2;
             result["Table 3"] = data.Table3;
@@ -787,7 +797,7 @@ namespace Main
             return null;
         }
 
-        public static void EditTableData(string day, string time, Dictionary<string, bool> dict, ReservationData tableinfo)
+        public static void EditTableData(string day, string time, Dictionary<string, string> dict, ReservationData tableinfo)
         {
             if (day == "1")
             {
@@ -1098,39 +1108,39 @@ namespace Main
 
         }
 
-        public static void ReserveTable()
+        public static void ReserveTable(string theUser) // theUser == the users first name on which the table will be reserved
         {
             string holder = "";
             ReservationData tableData = null;
             Console.WriteLine("Reserve Table\n1. This week\n2. Next week\n");
             string week = Console.ReadLine();
-            if (week == "1")
+            if (week == "1") // Week 1
             {
                 holder = File.ReadAllText("This Week Table Info.json");
                 tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
 
             }
-            else if (week == "2")
+            else if (week == "2") // Week 2
             {
                 holder = File.ReadAllText("Next Week Table Info.json");
                 tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
             }
             Console.WriteLine("Pick a day\nMonday CLOSED\n1. Tuesday\n2. Wednesday\n3. Thursday\n4. Friday\n5. Saturday\n6. Sunday");
+
             string day = Console.ReadLine();
+
             Console.WriteLine("Pick a time\n1. 16:00\n2. 18:00\n3. 20:00");
+
             string time = Console.ReadLine();
-            //CultureInfo language = new CultureInfo("en-US");
-            //var shortDate = DateTime.Now.ToString("dddd", language);
-            //Console.WriteLine(shortDate);
-            var reservationDay = chosenDayTime(day, time, tableData);
-            var tableAvailability = SetupTable(reservationDay);
+            var reservationDay = chosenDayTime(day, time, tableData); // Returns a Table class on the specific day and time
+            var tableAvailability = SetupTable(reservationDay); // Returns a dictionary with the table as key and the values for the availability of a table as value
 
             Console.WriteLine("Pick an available table number");
 
-            foreach (var table in tableAvailability)
+            foreach (var table in tableAvailability) // Prints the available tables
             {
                 string available;
-                if (table.Value == true)
+                if (table.Value != "")
                 {
                     available = " is not available";
                 }
@@ -1140,15 +1150,18 @@ namespace Main
                 }
                 Console.WriteLine(table.Key + available);
             }
+
             string pick = Console.ReadLine();
             string confirmation = ConfirmationText(week, day, time);
+
             Console.WriteLine($"\nConfirm Reservation\n\nYou want to reservere a table on:\n" + confirmation + $"\nTable {pick}\n\n1. Confirm\n2. Cancel\n");
             confirmation = Console.ReadLine();
+
             if (confirmation == "1")
             {
-                if (tableAvailability["Table " + pick] == false)
+                if (tableAvailability["Table " + pick] == "")
                 {
-                    tableAvailability["Table " + pick] = true;
+                    tableAvailability["Table " + pick] = theUser; 
 
                 }
                 else
@@ -1161,8 +1174,8 @@ namespace Main
                 Console.WriteLine("You have cancelled the reservation");
             }
 
-            EditTableData(day, time, tableAvailability, tableData);
-            var file = JsonConvert.SerializeObject(tableData, Formatting.Indented);
+            EditTableData(day, time, tableAvailability, tableData); // Edits the ReservationData class
+            var file = JsonConvert.SerializeObject(tableData, Formatting.Indented); // Converst ReservationData class into json
             if (week == "1")
             {
                 File.WriteAllText("This Week Table Info.json", file);
@@ -1295,15 +1308,15 @@ namespace Main
     }
     class Table
     {
-        public bool Table1 { get; set; }
-        public bool Table2 { get; set; }
-        public bool Table3 { get; set; }
-        public bool Table4 { get; set; }
-        public bool Table5 { get; set; }
-        public bool Table6 { get; set; }
-        public bool Table7 { get; set; }
-        public bool Table8 { get; set; }
-        public bool Table9 { get; set; }
-        public bool Table10 { get; set; }
+        public string Table1 { get; set; }
+        public string Table2 { get; set; }
+        public string Table3 { get; set; }
+        public string Table4 { get; set; }
+        public string Table5 { get; set; }
+        public string Table6 { get; set; }
+        public string Table7 { get; set; }
+        public string Table8 { get; set; }
+        public string Table9 { get; set; }
+        public string Table10 { get; set; }
     }
 }
