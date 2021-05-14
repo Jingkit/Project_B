@@ -16,7 +16,7 @@ namespace Main
             bool stopProgram = false;
             while (stopProgram == false)
             {
-                Console.WriteLine("1. Log in\n2. Reserve table\n3. Current Menu\n4. Future Menu\n5. Information about the Restaurant\n6. Account\n7. Exit\n");
+                Console.WriteLine("1. Log in\n2. Reserve table\n3. Current Menu\n4. Future Menu\n5. Information about the Restaurant\n6. Account\n7. Admin\n8. Exit\n");
                 string x = Console.ReadLine();
                 if (x == "1") // Login 
                 {
@@ -115,7 +115,7 @@ namespace Main
                     }
 
                 }
-                if (x == "7")
+                if (x == "8")
                 {
                     stopProgram = true;
                 }
@@ -209,6 +209,24 @@ namespace Main
                         {
                             continue;
                         }
+                    }
+                }
+                if (x == "7")
+                {
+                    Console.Write("Enter Password:\t");
+                    var password = Console.ReadLine();
+                    if(password == "Admin")
+                    {
+                        Console.WriteLine("1. Next Week\n2. Add dishes\n");
+                        var input = Console.ReadLine();
+                        if (input == "1")
+                        {
+                            var thisweek = File.ReadAllText("Next Week Table Info.json");
+                            File.WriteAllText("This Week Table Info.json", thisweek);
+                            var nextweek = File.ReadAllText("Default Table Info.json");
+                            File.WriteAllText("Next Week Table Info.json", nextweek);
+                        }
+
                     }
                 }
             }
