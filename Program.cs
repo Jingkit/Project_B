@@ -365,7 +365,8 @@ namespace Main
         {
             var json = File.ReadAllText("details.json");
             dynamic stuff = JsonConvert.DeserializeObject(json);
-            string result = string.Empty;
+            Console.WriteLine("______________________\n         Menu\n______________________\n\n         Apetizers");
+            string result = string.Empty;            
             foreach (var names in stuff)
             {
                 if (names.TypeDish == "Apetizers")
