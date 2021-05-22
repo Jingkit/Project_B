@@ -296,6 +296,7 @@ namespace Main
                         else if(input == "2")
                         {
                             //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                            AddDishes()
                         }
                         else if(input == "3")
                         {
@@ -441,18 +442,18 @@ namespace Main
                         }
                     }
                 }
-                else if (dish == "b")// if b is ur inpu, there will be a list of the dishes that are both vegetarian and glutenfree
-                {
-                    Console.WriteLine("These are the vegeterian glutenfree options:\n");
-                    foreach (var s in stuff)
-                    {
-                        if (s.GlutenFree == true && s.Veggie == true)
-                        {
-                            string bothdish = s.Number + s.Dot + s.Name;
-                            Console.WriteLine(bothdish);
-                        }
-                    }
-                }
+                //else if (dish == "b")// if b is ur inpu, there will be a list of the dishes that are both vegetarian and glutenfree
+                //{
+                //    Console.WriteLine("These are the vegeterian glutenfree options:\n");
+                //    foreach (var s in stuff)
+                //    {
+                //        if (s.GlutenFree == true && s.Veggie == true)
+                //        {
+                //            string bothdish = s.Number + s.Dot + s.Name;
+                //            Console.WriteLine(bothdish);
+                //        }
+                //    }
+                //}
                 else if (dish == n && dish != "0")// n is the number you input, and here it will show the details for the specific dishes 
                 {
                     foreach (var s in stuff)
