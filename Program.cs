@@ -365,9 +365,66 @@ namespace Main
         {
             var json = File.ReadAllText("details.json");
             dynamic stuff = JsonConvert.DeserializeObject(json);
-            foreach (var s in stuff)
+            string result = string.Empty;
+            foreach (var names in stuff)
             {
-                Console.WriteLine(s.Number + s.Dot + s.Name);
+                if (names.TypeDish == "Apetizers")
+                {
+                    Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
+
+                    result = names.Number;
+                }
+            }
+            int ok = int.Parse(result)+ 1;
+
+            Console.WriteLine("         Entremets");
+            string result1 = string.Empty;
+            foreach (var names in stuff)
+            {
+                if (names.TypeDish == "Entremets")
+                {
+                    Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
+
+                    result1 = names.Number;
+                }
+            }
+            int ok1 = int.Parse(result1) + 1;
+
+            Console.WriteLine("         Maindish");
+            string result2 = string.Empty;
+            foreach (var names in stuff)
+            {
+                if (names.TypeDish == "Maindish")
+                {
+                    Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
+
+                    result2 = names.Number;
+                }
+            }
+            int ok2 = int.Parse(result2) + 1;
+
+            Console.WriteLine("         Deserts");
+            string result3 = string.Empty;
+            foreach (var names in stuff)
+            {
+                if (names.TypeDish == "Deserts")
+                {
+                    Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
+
+                    result3 = names.Number;
+                }
+            }
+            int ok3 = int.Parse(result3) + 1;
+
+            Console.WriteLine("         Drinks");
+            string result4 = string.Empty;
+            foreach (var names in stuff)
+            {
+                if (names.TypeDish == "Drinks")
+                {
+                    Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
+                    result4 = names.Number;
+                }
             }
             Console.WriteLine("Press s for the option to view dish details or to sort dishes");
             string choise = Console.ReadLine();
