@@ -311,6 +311,55 @@ namespace Main
 
 
         }
+        static void AddDishes()
+        {
+            string json = File.ReadAllText("dish.json");
+            var array = JArray.Parse(json);
+            dynamic stuff = JsonConvert.DeserializeObject(json);        
+
+            string updatedJsonString = stuff.ToString();
+            System.IO.File.WriteAllText("dish.json", updatedJsonString);
+            
+            Console.WriteLine("Name");
+            string name = Console.ReadLine();            
+            Console.WriteLine("price");
+            string price = Console.ReadLine();
+            Console.WriteLine("veg");
+            string veggie = Console.ReadLine(); 
+            Console.WriteLine("fis");
+            string fish = Console.ReadLine();
+            Console.WriteLine("dr");
+            string drink = Console.ReadLine();
+            Console.WriteLine("glu");
+            string glutenv = Console.ReadLine();
+            Console.WriteLine("halal");
+            string halal = Console.ReadLine();
+            Console.WriteLine("spice");
+            string spicy = Console.ReadLine();
+            Console.WriteLine("ingr");
+            string ingr = Console.ReadLine();
+            Console.WriteLine("typedish together for example Maindish");
+            string typedish = Console.ReadLine();
+            
+            var itemToAdd = new JObject();
+            itemToAdd["Dot"] = ".";
+            itemToAdd["Number"] = int.Parse(num);
+            itemToAdd["Name"] = name;
+            itemToAdd["Price"] = price;
+            itemToAdd["Veggie"] = System.Convert.ToBoolean(veggie);
+            itemToAdd["Fish"] = System.Convert.ToBoolean(fish);
+            itemToAdd["Drink"] = System.Convert.ToBoolean(drink);
+            itemToAdd["Glutenvrij"] = System.Convert.ToBoolean(glutenv);
+            itemToAdd["Halal"] = System.Convert.ToBoolean(halal);
+            itemToAdd["Spicy"] = System.Convert.ToBoolean(spicy);
+            itemToAdd["Ingredients"] = ingr;
+            itemToAdd["TypeDish"] = typedish;
+
+            array.Add(itemToAdd);
+
+            var jsonToOutput = JsonConvert.SerializeObject(array, Formatting.Indented);
+            System.IO.File.WriteAllText("dish.json", jsonToOutput);
+        }
         static void CurrentMenuPage()
         {
             var json = File.ReadAllText("details.json");
