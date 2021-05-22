@@ -53,11 +53,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Project B\\github\\Project_B\\Main.csproj",
+      "projectUniqueName": "C:\\Users\\Jingk\\Documents\\ProjectB\\Project_B\\Main.csproj",
       "projectName": "Main",
-      "projectPath": "C:\\Project B\\github\\Project_B\\Main.csproj",
+      "projectPath": "C:\\Users\\Jingk\\Documents\\ProjectB\\Project_B\\Main.csproj",
       "packagesPath": "C:\\Users\\Jingk\\.nuget\\packages\\",
-      "outputPath": "C:\\Project B\\github\\Project_B\\obj\\",
+      "outputPath": "C:\\Users\\Jingk\\Documents\\ProjectB\\Project_B\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jingk\\AppData\\Roaming\\NuGet\\NuGet.Config",

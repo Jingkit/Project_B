@@ -284,7 +284,7 @@ namespace Main
                     var password = Console.ReadLine();
                     if(password == "Admin")
                     {
-                        Console.WriteLine("1. Change week\n2. Add dishes\n3. Back");
+                        Console.WriteLine("1. Change week\n2. Add dishes\n3. Change menu, dishes or prices\n4. Back");
                         var input = Console.ReadLine();
                         if (input == "1")
                         {
@@ -296,9 +296,84 @@ namespace Main
                         else if(input == "2")
                         {
                             //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                            AddDishes()
+                            AddDishes();
                         }
                         else if(input == "3")
+                        {
+                            var json = File.ReadAllText("details.json");
+                            dynamic stuff = JsonConvert.DeserializeObject(json);
+                            //this is a back-up of the earlier version
+                            string backup = stuff.ToString();
+                            File.WriteAllText("ok.json", backup);
+
+
+
+                            //shows menu
+                            foreach (var names in stuff)
+                            {
+                                Console.WriteLine(names["Name"]);
+                            }
+
+
+
+                            //asks for the name of the dish of which u want to make a change to
+                            Console.WriteLine("\nPlease type in the name of the dish you want to make changes to.\n" +
+                                "Note to type it right and that its capital sensetive, this is the current Menu");
+                            var dish = Console.ReadLine();
+                            //asks about what u want to change about the dish
+                            Console.WriteLine("What do you want to change about this dish, press 1 for the name,\n" +
+                                "2 for the price and 3 for the ingridiënts. ");
+                            var what = Console.ReadLine();
+                            //asks what u want to change it to
+                            Console.WriteLine("What do you want to change this with");
+                            var change = Console.ReadLine();
+
+
+
+                            //making the change for the dish name
+                            foreach (var idk in stuff)
+                            {
+                                if (idk.Name == dish && what == "1")
+                                {
+                                    idk.Name.Replace(change);
+                                    Console.WriteLine(idk.Name);
+                                }
+                            }
+                            //makes the change for the dish price
+                            foreach (var idk in stuff)
+                            {
+                                if (idk.Name == dish && what == "2")
+                                {
+                                    idk.Price.Replace(change);
+                                    Console.WriteLine(idk.Price);
+                                }
+                            }
+                            //makes the change for the dish ingridients
+                            foreach (var idk in stuff)
+                            {
+                                if (idk.Name == dish && what == "3")
+                                {
+                                    idk.Ingredients.Replace(change);
+                                    Console.WriteLine(idk.Ingredients);
+                                }
+                            }
+                            //you can copy paste this 
+                            //  foreach (var idk in stuff)
+                            //      {
+                            //      if (idk.Name == dish && what == "3")
+                            //          {
+                            //          idk.Ingredients.Replace(change);         if needed you can change ingredients with for example veggie its not a vegeterian dish anymore 
+                            //          Console.WriteLine(idk.Ingredients);
+                            //          }
+                            //      }
+
+
+
+                            //saves  the updated file
+                            string updatedJsonString = stuff.ToString();
+                            File.WriteAllText("details.json", updatedJsonString);
+                        }
+                        else if(input == "4")
                         {
                             continue;
                         }
@@ -314,12 +389,12 @@ namespace Main
         }
         static void AddDishes()
         {
-            string json = File.ReadAllText("dish.json");
+            string json = File.ReadAllText("details.json");
             var array = JArray.Parse(json);
             dynamic stuff = JsonConvert.DeserializeObject(json);        
 
             string updatedJsonString = stuff.ToString();
-            System.IO.File.WriteAllText("dish.json", updatedJsonString);
+            File.WriteAllText("dish.json", updatedJsonString);
             
             Console.WriteLine("Name");
             string name = Console.ReadLine();            
@@ -344,22 +419,21 @@ namespace Main
             
             var itemToAdd = new JObject();
             itemToAdd["Dot"] = ".";
-            itemToAdd["Number"] = int.Parse(num);
             itemToAdd["Name"] = name;
             itemToAdd["Price"] = price;
-            itemToAdd["Veggie"] = System.Convert.ToBoolean(veggie);
-            itemToAdd["Fish"] = System.Convert.ToBoolean(fish);
-            itemToAdd["Drink"] = System.Convert.ToBoolean(drink);
-            itemToAdd["Glutenvrij"] = System.Convert.ToBoolean(glutenv);
-            itemToAdd["Halal"] = System.Convert.ToBoolean(halal);
-            itemToAdd["Spicy"] = System.Convert.ToBoolean(spicy);
+            itemToAdd["Veggie"] = Convert.ToBoolean(veggie);
+            itemToAdd["Fish"] = Convert.ToBoolean(fish);
+            itemToAdd["Drink"] = Convert.ToBoolean(drink);
+            itemToAdd["Glutenvrij"] = Convert.ToBoolean(glutenv);
+            itemToAdd["Halal"] = Convert.ToBoolean(halal);
+            itemToAdd["Spicy"] = Convert.ToBoolean(spicy);
             itemToAdd["Ingredients"] = ingr;
             itemToAdd["TypeDish"] = typedish;
 
             array.Add(itemToAdd);
 
             var jsonToOutput = JsonConvert.SerializeObject(array, Formatting.Indented);
-            System.IO.File.WriteAllText("dish.json", jsonToOutput);
+            File.WriteAllText("details.json", jsonToOutput);
         }
         static void CurrentMenuPage()
         {

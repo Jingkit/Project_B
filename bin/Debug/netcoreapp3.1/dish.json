@@ -49,7 +49,7 @@
   },
   {
     "Dot": ".",
-    "Name": "Kippensoep",
+    "Name": "Soep",
     "Veggie": true,
     "Fish": true,
     "Drink": false,
@@ -230,18 +230,5 @@
     "Halal": false,
     "Spicy": false,
     "Ingredients": "De Ingredienten zijn:\nGrain (mostly malted barley but also other grains)\nHops (grown in many different varieties)\nYeast (responsible for fermentation; based on style-specific strains)\nWater (accounts for up to 95 percent of beer’s content)"
-  },
-  {
-    "Dot": ".",
-    "Name": "NewDish",
-    "Price": "17",
-    "Veggie": true,
-    "Fish": true,
-    "Drink": true,
-    "Glutenvrij": true,
-    "Halal": true,
-    "Spicy": true,
-    "Ingredients": "sfaionaofnaf",
-    "TypeDish": "Maindish"
   }
 ]
