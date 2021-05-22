@@ -16,11 +16,14 @@ namespace Main
             bool stopProgram = false;
             while (stopProgram == false)
             {
-                Console.WriteLine("1. Log in\n2. Reserve table/Change Reservation\n3. Current Menu\n4. Future Menu\n5. Information about the Restaurant\n6. Account\n7. Admin\n8. Exit\n");
+                Console.WriteLine("1. Log in/Register account\n2. Reserve table/Cancel Reservation\n3. Menu and dishes\n4. Account\n5. Admin\n6. Information about the Restaurant\n7. Exit\n");
                 string x = Console.ReadLine();
-                if (x == "1") // Login 
+                if (x == "1")
                 {
-                    LogIn();
+                    Console.WriteLine("Press a numberkey to choose option");
+                    Console.WriteLine("1: Login");
+                    Console.WriteLine("2: Register new account");
+                    Console.WriteLine("0: Back");
                     string choice = Console.ReadLine();
                     if (choice == "1")
                     {
@@ -60,21 +63,17 @@ namespace Main
                     {
                         continue;
                     }
-                }
+                } // Login
                 if (x == "3") // Current Menu
                 {
                     CurrentMenuPage();
                     continue;
-                }
-                if (x == "4") // FutureMenu
-                {
-                    FutureMenu();
-                }
-                if (x == "5") // Info
+                } // Menu
+                if (x == "6") // Info
                 {
                     Info();
-                }
-                if (x == "6") // Account 
+                } // Information about the restaurant
+                if (x == "4") // Account 
                 {
                     if (theUser == "")
                     {
@@ -114,14 +113,15 @@ namespace Main
 
                     }
 
-                }
-                if (x == "8")
+                } // Account
+                if (x == "7")
                 {
                     stopProgram = true;
-                }
+                } // Exit
                 if (x == "2")
                 {
-                    Console.WriteLine("1. Reserve Table\n2. Change Reservation");
+
+                    Console.WriteLine("1. Reserve Table\n2. Cancel Reservation");
                     var option = Console.ReadLine();
                     if(option == "1")
                     {
@@ -218,16 +218,73 @@ namespace Main
                     }
                     else if(option == "2")
                     {
-                        //Zet hier code voor Change Reservation
+                        string holder = "";
+                        ReservationData tableData = null;
+                        Console.WriteLine("Enter the information of your current reservation\n1. This week\n2. Next week");
+                        string week = Console.ReadLine();
+
+                        if (week == "1") // Week 1
+                        {
+                            holder = File.ReadAllText("This Week Table Info.json");
+                            tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
+
+                        }
+                        else if (week == "2") // Week 2
+                        {
+                            holder = File.ReadAllText("Next Week Table Info.json");
+                            tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
+                        }
+
+                        Console.WriteLine("Enter the day of your reservation\n1. Tuesday\n2. Wednesday\n3. Thursday\n4. Friday\n5. Saturday\n6. Sunday");
+                        var day = Console.ReadLine();
+                        Console.WriteLine("Enter the time of your reservation\n1. 16:00\n2. 18:00\n3. 20:00");
+                        var time = Console.ReadLine();
+
+                        var reservationDay = chosenDayTime(day, time, tableData); 
+                        var tableAvailability = SetupTable(reservationDay); 
+
+                        Console.Write("Enter the name you have reserved the table on: ");
+                        var firstname = Console.ReadLine();
+                        string table = null;
+                        bool changeTable = false;
+                        foreach (var value in tableAvailability)
+                        {
+                            if(value.Value == firstname)
+                            {
+                                table = value.Key;
+                                changeTable = true;
+                            }
+                        }
+                        if (changeTable)
+                        {
+                            tableAvailability[table] = "";
+                            Console.WriteLine("Reservation cancelled successfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No table reserved on {firstname}");
+                        }
+
+                        //saves  the updated file
+                        EditTableData(day, time, tableAvailability, tableData); // Edits the ReservationData class
+                        var file = JsonConvert.SerializeObject(tableData, Formatting.Indented); // Converst ReservationData class into json
+                        if (week == "1")
+                        {
+                            File.WriteAllText("This Week Table Info.json", file);
+                        }
+                        else if (week == "2")
+                        {
+                            File.WriteAllText("Next Week Table Info.json", file);
+                        }
                     }
-                }
-                if (x == "7")
+                } // Reserve table/Cancel
+                if (x == "5")
                 {
                     Console.Write("Enter Password:\t");
                     var password = Console.ReadLine();
                     if(password == "Admin")
                     {
-                        Console.WriteLine("1. Next Week\n2. Add dishes\n");
+                        Console.WriteLine("1. Change week\n2. Add dishes\n3. Back");
                         var input = Console.ReadLine();
                         if (input == "1")
                         {
@@ -236,19 +293,23 @@ namespace Main
                             var nextweek = File.ReadAllText("Default Table Info.json");
                             File.WriteAllText("Next Week Table Info.json", nextweek);
                         }
-
+                        else if(input == "2")
+                        {
+                            //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        }
+                        else if(input == "3")
+                        {
+                            continue;
+                        }
                     }
-                }
+                    else
+                    {
+                        Console.WriteLine("Wrong password");
+                    }
+                } // Admin
             }
 
 
-        }
-        static void LogIn()
-        {
-            Console.WriteLine("Press a numberkey to choose option");
-            Console.WriteLine("1: Login");
-            Console.WriteLine("2: Register new account");
-            Console.WriteLine("0: Back");
         }
         static void CurrentMenuPage()
         {
@@ -297,7 +358,7 @@ namespace Main
                 }
                 else if (dish == "s")
                 {
-                    Console.WriteLine("These are the vegetarian options:\n");
+                    Console.WriteLine("These are the spicy options:\n");
                     foreach (var s in stuff)
                     {
                         if (s.Spicy == true)
@@ -324,7 +385,6 @@ namespace Main
                     Console.WriteLine("These are the Halal options:\n");
                     foreach (var s in stuff)
                     {
-                        Console.WriteLine(s.Number + s.Dot + s.Name);
                         if (s.Halal == true)
                         {
                             string halaldishes = s.Number + s.Dot + s.Name;
@@ -361,67 +421,11 @@ namespace Main
             }
 
         }
-        static void FutureMenu()
-        {
-
-            //Welcome message
-            Console.WriteLine("***Welcome to the future menu page!***\n");
-            Console.WriteLine("Here you can find dishes that are to be added... \n\n");
-
-            //New dishes content 
-            //Primers   
-            Console.WriteLine("Appetizer");
-            string[] appetizerDishes = { "1. Bruschetta", "2. Insalata con mozzarella e avocado", "3. Grissini con prosciutto crudo e parmigiano" };
-            List<string> appetizerDishesList = new List<string>(appetizerDishes);
-            foreach (string x in appetizerDishes)
-                Console.WriteLine(x);
-
-
-            //Main dishes
-            Console.WriteLine("\nMain dishes");
-            string[] mainDishes = { "4. Risotto ai funghi", "5. Melanzane alla Parmigiana", "6. Bistecca alla Fiorentina" };
-            List<string> mainDishesList = new List<string>(mainDishes);
-            foreach (string x in mainDishes)
-                Console.WriteLine(x);
-
-
-            //Desserts
-            Console.WriteLine("\nDesserts");
-            string[] desserts = { "7. Tiramisu", "8. Gelato alla frutta" };
-            List<string> dessertsList = new List<string>(desserts);
-            foreach (string x in desserts)
-                Console.WriteLine(x);
-
-
-            //Drinks
-            Console.WriteLine("\nDrinks");
-            string[] drinks = { "9. Limoncello", "10. Disaronno", "11. Sambuca" };
-            List<string> drinksList = new List<string>(drinks);
-            foreach (string x in drinks)
-                Console.WriteLine(x);
-            {
-
-            }
-
-
-            //View dishes
-            Console.WriteLine("Enter the dishnumber you want to view: ");
-            Console.WriteLine("Or press 0 to go back");
-            int dishNumber = Convert.ToInt32(Console.ReadLine());
-
-            if (dishNumber == 0)
-            {
-
-            }
-
-
-
-        }
         static void Info()
         {
             Console.WriteLine("_________________________\n\nOpening Hours\n\nMonday:     CLOSED\nTuesday:    16:00-22:00\n" +
             "Wednesday:  16:00-22:00\nThursday:   16:00-22:00\nFriday:     16:00-22:00\nSatuday:    16:00-22:00\nSunday:     " +
-            "16:00-22:00\n_________________________\n\nContact Us\n\nPhone Number: 071-5119113\n_________________________\n");
+            "16:00-22:00\n_________________________\n\nContact Us\n\nPhone Number: 071-5119113\nEmail:\tRestaurant@hr.nl\n_________________________\n");
             Console.WriteLine("0. Previous Page");
             string x = Console.ReadLine();
             if (x == "0")
@@ -1111,6 +1115,8 @@ namespace Main
         public static void ReserveTable(string theUser) // theUser == the users first name on which the table will be reserved
         {
             string holder = "";
+            string peopleAmount = "";
+            int amount = 0;
             ReservationData tableData = null;
             Console.WriteLine("Reserve Table\n1. This week\n2. Next week\n");
             string week = Console.ReadLine();
@@ -1132,10 +1138,35 @@ namespace Main
             Console.WriteLine("Pick a time\n1. 16:00\n2. 18:00\n3. 20:00");
 
             string time = Console.ReadLine();
+            Console.WriteLine("\n___________________________________\n\n" +
+                "Every table has 4 seats, to make an reservation of more than 4 people,\nplease contact us via email or phone\n___________________________________\n");
+            Console.Write("Enter amount of people: ");
+            peopleAmount = Console.ReadLine();
+            if(peopleAmount == "1")
+            {
+                amount = 1;
+            }
+            else if(peopleAmount == "2")
+            {
+                amount = 2;
+            }
+            else if (peopleAmount == "3")
+            {
+                amount = 3;
+            }
+            else if (peopleAmount == "4")
+            {
+                amount = 4;
+            }
+            else
+            {
+                Console.WriteLine("Please retry and enter a number between 0 and 4");
+                return;
+            }
             var reservationDay = chosenDayTime(day, time, tableData); // Returns a Table class on the specific day and time
             var tableAvailability = SetupTable(reservationDay); // Returns a dictionary with the table as key and the values for the availability of a table as value
 
-            Console.WriteLine("Pick an available table number");
+            Console.WriteLine("Pick an available table number\n"); 
 
             foreach (var table in tableAvailability) // Prints the available tables
             {
@@ -1154,7 +1185,7 @@ namespace Main
             string pick = Console.ReadLine();
             string confirmation = ConfirmationText(week, day, time);
 
-            Console.WriteLine($"\nConfirm Reservation\n\nYou want to reservere a table on:\n" + confirmation + $"\nTable {pick}\n\n1. Confirm\n2. Cancel\n");
+            Console.WriteLine($"\nConfirm Reservation\n\nYou want to reservere a table on:\n" + confirmation + $"\nTable {pick}\nEstimated Costs: ${amount * 20}\n\n1. Confirm\n2. Cancel\n");
             confirmation = Console.ReadLine();
 
             if (confirmation == "1")
@@ -1226,97 +1257,5 @@ namespace Main
             Console.WriteLine($"Reservation successful!\n\nAn email with the reservation code has been sent to {reserveInfo.email}.\n\nPress enter to return.");
             Console.ReadLine();
         }
-    }
-    public class UserInfo
-    {
-        public string firstname;
-        public string lastname;
-        public string email;
-        public string phone;
-
-        public UserInfo(string name, string surname, string mail, string number)
-        {
-            this.firstname = name;
-            this.lastname = surname;
-            this.email = mail;
-            this.phone = number;
-        }
-    }
-
-    class json
-    {
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public string email { get; set; }
-        public string phone { get; set; }
-    }
-
-    class MainJson
-    {
-        public dynamic parse;
-
-        public void SerializeJson(json thething) // Gebruik deze method om een class die je maakt voor jouw eigen code om te zetten naar een json file
-        {
-            string text = JsonConvert.SerializeObject(thething);
-            Console.Write("Enter File name: ");
-            string filename = Console.ReadLine();
-            File.WriteAllText($"{filename}.json", text);
-        }
-
-        public void DeserializeJson(string text)
-        {
-            dynamic json = JsonConvert.DeserializeObject(text); // Gebruik deze method om de values van de json bestand te printen, dit kan je gaan veranderen door een child class te maken en deze method te overwriten.
-                                                                // Zo kan je bijvoorbeeld inplaats van Console.WriteLine(), iets returnen met de values erin.
-            foreach (var key in json)
-            {
-                Console.WriteLine(key);
-                //Console.WriteLine(key) werkt ook, maar dan krijg je "key" : "value" ("firstname" : "test") uitgeprint. Dat kan handig zijn.
-                foreach (var variable in key)
-                {
-                    Console.WriteLine(variable);
-                }
-
-            }
-        }
-
-        public void Parse(string text) 
-        {
-            dynamic parse = JObject.Parse(text);
-            this.parse = parse;
-        }
-
-    }
-    class Code
-    {
-        public List<int> reservationCode { get; set; }
-    }
-    class ReservationData
-    {
-        public Time Tuesday { get; set; }
-        public Time Wednesday { get; set; }
-        public Time Thursday { get; set; }
-        public Time Friday { get; set; }
-        public Time Saturday { get; set; }
-        public Time Sunday { get; set; }
-
-    }
-    class Time
-    {
-        public Table Four { get; set; }
-        public Table Six { get; set; }
-        public Table Eight { get; set; }
-    }
-    class Table
-    {
-        public string Table1 { get; set; }
-        public string Table2 { get; set; }
-        public string Table3 { get; set; }
-        public string Table4 { get; set; }
-        public string Table5 { get; set; }
-        public string Table6 { get; set; }
-        public string Table7 { get; set; }
-        public string Table8 { get; set; }
-        public string Table9 { get; set; }
-        public string Table10 { get; set; }
     }
 }
