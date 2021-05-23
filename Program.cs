@@ -501,13 +501,60 @@ namespace Main
                     result4 = names.Number;
                 }
             }
-            Console.WriteLine("Press s for the option to view dish details or to sort dishes");
+            Console.WriteLine("Press s for the option to view dish details or to sort dishes\nPress f to view the future menu\nPress 0 to go back");
             string choise = Console.ReadLine();
             if (choise == "s")
             {
                 SortingMenu();
             }
+            else if (choise == "f")
+            {
+                FutureMenuPage();
+            }
+            else if (choise == "0")
+            {
+                return;
+            }
+        }
+        static void FutureMenuPage()
+        {
+            Console.WriteLine("***Welcome to the future menu page!***\n");
 
+            //New dishes content 
+            //Primers   
+            Console.WriteLine("Appetizer");
+            string[] appetizerDishes = { "1. Bruschetta", "2. Insalata con mozzarella e avocado", "3. Grissini con prosciutto crudo e parmigiano" };
+            List<string> appetizerDishesList = new List<string>(appetizerDishes);
+            foreach (string x in appetizerDishes)
+                Console.WriteLine(x);
+
+
+            //Main dishes
+            Console.WriteLine("\nMain dishes");
+            string[] mainDishes = { "4. Risotto ai funghi", "5. Melanzane alla Parmigiana", "6. Bistecca alla Fiorentina" };
+            List<string> mainDishesList = new List<string>(mainDishes);
+            foreach (string x in mainDishes)
+                Console.WriteLine(x);
+
+
+            //Desserts
+            Console.WriteLine("\nDesserts");
+            string[] desserts = { "7. Tiramisu", "8. Gelato alla frutta" };
+            List<string> dessertsList = new List<string>(desserts);
+            foreach (string x in desserts)
+                Console.WriteLine(x);
+
+
+            //Drinks
+            Console.WriteLine("\nDrinks");
+            string[] drinks = { "9. Limoncello", "10. Disaronno", "11. Sambuca" };
+            List<string> drinksList = new List<string>(drinks);
+            foreach (string x in drinks)
+                Console.WriteLine(x);
+
+            Console.WriteLine("Press enter to go back");
+            Console.ReadLine();
+            CurrentMenuPage();
         }
         static void SortingMenu()
         {
@@ -623,7 +670,6 @@ namespace Main
         {
             Console.WriteLine("Exit");
         }
-
         public static void Register(Tuple<string, string> username) // Function to register an account using a tuple that consists of a username and password.
         {
             using (StreamWriter text = new StreamWriter(File.Create($"{username.Item1}.json")))
@@ -635,7 +681,6 @@ namespace Main
 
             Console.WriteLine("Account succesfuly made");
         }
-
         public static bool Login(Tuple<string, string> username) // Function to login using a tuple that consists of a username and password.
         {
             string usernamecheck, passwordcheck = string.Empty;
@@ -667,7 +712,6 @@ namespace Main
                 return false;
             }
         }
-
         public static Tuple<string, string> inputUsernamePassword()
         {
             Console.Write("Enter a username: ");
@@ -676,11 +720,6 @@ namespace Main
             string password = Console.ReadLine();
 
             return Tuple.Create(username, password);
-        }
-
-        public static void AddInfo()
-        {
-
         }
         public static Dictionary<string, string> SetupTable(Table data)
         {
@@ -791,7 +830,6 @@ namespace Main
             }
             return null;
         }
-
         public static string ConfirmationText(string week, string day, string time)
         {
             if (week == "1")
@@ -982,7 +1020,6 @@ namespace Main
             }
             return null;
         }
-
         public static void EditTableData(string day, string time, Dictionary<string, string> dict, ReservationData tableinfo)
         {
             if (day == "1")
@@ -1293,7 +1330,6 @@ namespace Main
             }
 
         }
-
         public static void ReserveTable(string theUser) // theUser == the users first name on which the table will be reserved
         {
             string holder = "";
