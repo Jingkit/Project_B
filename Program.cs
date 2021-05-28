@@ -450,7 +450,7 @@ namespace Main
                     result = names.Number;
                 }
             }
-            int ok = int.Parse(result)+ 1;
+
 
             Console.WriteLine("         Entremets");
             string result1 = string.Empty;
@@ -463,7 +463,7 @@ namespace Main
                     result1 = names.Number;
                 }
             }
-            int ok1 = int.Parse(result1) + 1;
+
 
             Console.WriteLine("         Maindish");
             string result2 = string.Empty;
@@ -476,7 +476,7 @@ namespace Main
                     result2 = names.Number;
                 }
             }
-            int ok2 = int.Parse(result2) + 1;
+
 
             Console.WriteLine("         Deserts");
             string result3 = string.Empty;
@@ -489,7 +489,7 @@ namespace Main
                     result3 = names.Number;
                 }
             }
-            int ok3 = int.Parse(result3) + 1;
+
 
             Console.WriteLine("         Drinks");
             string result4 = string.Empty;
@@ -511,10 +511,39 @@ namespace Main
             {
                 FutureMenuPage();
             }
+            else if (choise == "r")
+            {
+                reviews();
+            }
             else if (choise == "0")
             {
                 return;
             }
+        }
+        static void reviews()
+        {
+            string json = File.ReadAllText("reviews.json");
+            var array = JArray.Parse(json);
+            dynamic stuff = JsonConvert.DeserializeObject(json);
+
+
+            Console.WriteLine("Which dish do you want to review(Number or name of the dish)");
+            string dishname = Console.ReadLine();
+            Console.WriteLine("How many stars do you rate this dish(1-5)");
+            string num = Console.ReadLine();
+            Console.WriteLine("Could you explain why?");
+            string ask = Console.ReadLine();
+
+            var itemToAdd = new JObject();
+            itemToAdd["Dish"] = dishname;
+            itemToAdd["Stars"] = int.Parse(num);
+            itemToAdd["Why"] = ask;
+
+            array.Add(itemToAdd);
+
+            var jsonToOutput = JsonConvert.SerializeObject(array, Formatting.Indented);
+            System.IO.File.WriteAllText("reviews.json", jsonToOutput);
+            return;
         }
         static void FutureMenuPage()
         {
