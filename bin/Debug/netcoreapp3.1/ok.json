@@ -44,8 +44,8 @@
   {
     "Dot": ".",
     "Number": "4",
-    "Name": "Kippensoep",
-    "Price": " $12.00",
+    "Name": "kippensoep",
+    "Price": "$19",
     "Veggie": true,
     "Fish": true,
     "Drink": false,

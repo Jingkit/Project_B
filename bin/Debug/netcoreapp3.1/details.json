@@ -44,15 +44,15 @@
   {
     "Dot": ".",
     "Number": "4",
-    "Name": "Soep",
-    "Price": " $12.00",
+    "Name": "kippensoep",
+    "Price": "$19",
     "Veggie": true,
     "Fish": true,
     "Drink": false,
     "GlutenFree": true,
     "Halal": true,
     "Spicy": false,
-    "Ingredients": "De Ingredienten zijn:\n1 grote rode paprika, 1 sjalotje, 2 eetlepels olijfolie, 1 theelepel pizzakruiden, \neen halve liter kippenbouillon, vers gemalen peper, zout, eventueel citroensap, 150 gr. oesterzwammen, 2 eetlepels basilicumreepjes",
+    "Ingredients": "kip, water",
     "TypeDish": "Entremets"
   },
   {

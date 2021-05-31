@@ -153,8 +153,8 @@ namespace Main
                                 string input = Console.ReadLine();
                                 if (input == "1")
                                 {                            
-                                    ReserveTable(reserveInfo.firstname);
-                                    SentEmail(reserveInfo);
+                                    ReserveTable(reserveInfo);
+
                                 }
                                 if (input == "2")
                                 {
@@ -179,8 +179,7 @@ namespace Main
                                 string input = Console.ReadLine();
                                 if (input == "1")
                                 {                            
-                                    ReserveTable(reserveInfo.firstname);
-                                    SentEmail(reserveInfo);
+                                    ReserveTable(reserveInfo);
                                 }
                                 if (input == "2")
                                 {
@@ -206,8 +205,7 @@ namespace Main
                             string input = Console.ReadLine();
                             if (input == "1")
                             {
-                                ReserveTable(reserveInfo.firstname);
-                                SentEmail(reserveInfo);
+                                ReserveTable(reserveInfo);
                             }
                             if (input == "2")
                             {
@@ -1359,7 +1357,7 @@ namespace Main
             }
 
         }
-        public static void ReserveTable(string theUser) // theUser == the users first name on which the table will be reserved
+        public static void ReserveTable(UserInfo theUser) // theUser == the users first name on which the table will be reserved
         {
             string holder = "";
             string peopleAmount = "";
@@ -1439,7 +1437,8 @@ namespace Main
             {
                 if (tableAvailability["Table " + pick] == "")
                 {
-                    tableAvailability["Table " + pick] = theUser; 
+                    tableAvailability["Table " + pick] = theUser.firstname;
+                    SentEmail(theUser, day, time, week);
 
                 }
                 else
@@ -1463,8 +1462,52 @@ namespace Main
                 File.WriteAllText("Next Week Table Info.json", file);
             }
         }
-        public static void SentEmail(UserInfo reserveInfo)
+        public static void SentEmail(UserInfo reserveInfo, string day, string time, string week)
         {
+            if(day == "1")
+            {
+                day = "Tuesday";
+            }
+            else if(day == "2")
+            {
+                day = "Wednesday";
+            }
+            else if (day == "3")
+            {
+                day = "Thursday";
+            }
+            else if (day == "4")
+            {
+                day = "Friday";
+            }
+            else if (day == "5")
+            {
+                day = "Saturday";
+            }
+            else if (day == "6")
+            {
+                day = "Sunday";
+            }
+            if(time == "1")
+            {
+                time = "16:00";
+            }
+            else if(time == "2")
+            {
+                time = "28:00";
+            }
+            else if (time == "3")
+            {
+                time = "20:00";
+            }
+            if(week == "1")
+            {
+                week = "This week";
+            }
+            else if (week == "2")
+            {
+                week = "Next week";
+            }
             Random generator = new Random();
             int randomNumber = generator.Next(100000, 999999);
             string read = File.ReadAllText("allCodeNumbers.json");
@@ -1493,7 +1536,7 @@ namespace Main
 
             try
             {
-                sentMail.Send("1003967@hr.nl", $"{reserveInfo.email}", "Reservation code", $"Thank you for making a reservation at our restaurant!\n\nYour Reservation Code is:\t{randomNumber}");
+                sentMail.Send("1003967@hr.nl", $"{reserveInfo.email}", "Reservation code", $"Thank you for making a reservation at our restaurant!\n\nYour Reservation Code is:\t{randomNumber}\nDate: {week} at {time} on {day}");
                 Console.WriteLine("Email sent");
             }
             catch (Exception ex)
@@ -1501,7 +1544,7 @@ namespace Main
                 Console.WriteLine("Error: " + ex.Message);
             }
 
-            Console.WriteLine($"Reservation successful!\n\nAn email with the reservation code has been sent to {reserveInfo.email}.\n\nPress enter to return.");
+            Console.WriteLine($"Reservation successful!\n\nAn email with the reservation code and date has been sent to {reserveInfo.email}.\n\nPress enter to return.");
             Console.ReadLine();
         }
     }
