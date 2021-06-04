@@ -394,37 +394,49 @@ namespace Main
             string updatedJsonString = stuff.ToString();
             File.WriteAllText("dish.json", updatedJsonString);
             
-            Console.WriteLine("Name");
+            Console.WriteLine("Name of the new dish.");
             string name = Console.ReadLine();            
-            Console.WriteLine("price");
+            Console.WriteLine("Price");
             string price = Console.ReadLine();
-            Console.WriteLine("veg");
-            string veggie = Console.ReadLine(); 
-            Console.WriteLine("fis");
+            Console.WriteLine("Vegetarian (true or false)");
+            string veggie = Console.ReadLine();
+            Console.WriteLine("Fish (true or false)");
             string fish = Console.ReadLine();
-            Console.WriteLine("dr");
+            Console.WriteLine("Drink (true or false)");
             string drink = Console.ReadLine();
-            Console.WriteLine("glu");
+            Console.WriteLine("Glutenfree (true or false)");
             string glutenv = Console.ReadLine();
-            Console.WriteLine("halal");
+            Console.WriteLine("Halal (true or false)");
             string halal = Console.ReadLine();
-            Console.WriteLine("spice");
+            Console.WriteLine("Spicy (true or false) ");
             string spicy = Console.ReadLine();
-            Console.WriteLine("ingr");
+            Console.WriteLine("Ingredients");
             string ingr = Console.ReadLine();
-            Console.WriteLine("typedish together for example Maindish");
+            Console.WriteLine("Typedish choose from Appetizers, Entremets, Maindish, Desserts, Drinks");
             string typedish = Console.ReadLine();
-            
+
+            var a = String.Empty;
+            foreach (var idk in stuff)
+            {
+                
+                    a = idk.Number;
+                
+            }
+
+            int e = int.Parse(a) + 1;
+
+
             var itemToAdd = new JObject();
             itemToAdd["Dot"] = ".";
+            itemToAdd["Number"] = e.ToString();
             itemToAdd["Name"] = name;
             itemToAdd["Price"] = price;
-            itemToAdd["Veggie"] = Convert.ToBoolean(veggie);
-            itemToAdd["Fish"] = Convert.ToBoolean(fish);
-            itemToAdd["Drink"] = Convert.ToBoolean(drink);
-            itemToAdd["Glutenvrij"] = Convert.ToBoolean(glutenv);
-            itemToAdd["Halal"] = Convert.ToBoolean(halal);
-            itemToAdd["Spicy"] = Convert.ToBoolean(spicy);
+            itemToAdd["Veggie"] = veggie;
+            itemToAdd["Fish"] = fish;
+            itemToAdd["Drink"] = drink;
+            itemToAdd["Glutenvrij"] = glutenv;
+            itemToAdd["Halal"] = halal;
+            itemToAdd["Spicy"] = spicy;
             itemToAdd["Ingredients"] = ingr;
             itemToAdd["TypeDish"] = typedish;
 
@@ -437,18 +449,17 @@ namespace Main
         {
             var json = File.ReadAllText("details.json");
             dynamic stuff = JsonConvert.DeserializeObject(json);
-            Console.WriteLine("______________________\n         Menu\n______________________\n\n         Apetizers");
+            Console.WriteLine("______________________\n         Menu\n______________________\n\n         Appetizers");
             string result = string.Empty;            
             foreach (var names in stuff)
             {
-                if (names.TypeDish == "Apetizers")
+                if (names.TypeDish == "Appetizers")
                 {
                     Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
 
                     result = names.Number;
                 }
             }
-
 
             Console.WriteLine("         Entremets");
             string result1 = string.Empty;
@@ -462,7 +473,6 @@ namespace Main
                 }
             }
 
-
             Console.WriteLine("         Maindish");
             string result2 = string.Empty;
             foreach (var names in stuff)
@@ -475,19 +485,17 @@ namespace Main
                 }
             }
 
-
-            Console.WriteLine("         Deserts");
+            Console.WriteLine("         Desserts");
             string result3 = string.Empty;
             foreach (var names in stuff)
             {
-                if (names.TypeDish == "Deserts")
+                if (names.TypeDish == "Desserts")
                 {
                     Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
 
                     result3 = names.Number;
                 }
             }
-
 
             Console.WriteLine("         Drinks");
             string result4 = string.Empty;
@@ -593,19 +601,14 @@ namespace Main
                 "follow that up by pressing Enter.");
             var dish = Console.ReadLine();
             var n = dish;
-            List<string> list = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "0", "v", "g", "h", "b", "s" };
             while(dish != "0")
             {
-                if (!list.Contains(n))
-                {
-                    Console.WriteLine("There is no such dish or command");
-                }
-                else if (dish == "v")
+                if (dish == "v")
                 {
                     Console.WriteLine("These are the vegetarian options:\n");
                     foreach (var s in stuff)
                     {
-                        if (s.Veggie == true)
+                        if (s.Veggie == "true")
                         {
                             string vegdishes = s.Number + s.Dot + s.Name + s.Price;
                             Console.WriteLine(vegdishes);
@@ -617,7 +620,7 @@ namespace Main
                     Console.WriteLine("These are the spicy options:\n");
                     foreach (var s in stuff)
                     {
-                        if (s.Spicy == true)
+                        if (s.Spicy == "true")
                         {
                             string spicedishes = s.Number + s.Dot + s.Name;
                             Console.WriteLine(spicedishes);
@@ -629,7 +632,7 @@ namespace Main
                     Console.WriteLine("These are the glutenfree options:\n");
                     foreach (var s in stuff)
                     {
-                        if (s.GlutenFree == true)
+                        if (s.GlutenFree == "true")
                         {
                             string glfrdishes = s.Number + s.Dot + s.Name;
                             Console.WriteLine(glfrdishes);
@@ -641,7 +644,7 @@ namespace Main
                     Console.WriteLine("These are the Halal options:\n");
                     foreach (var s in stuff)
                     {
-                        if (s.Halal == true)
+                        if (s.Halal == "true")
                         {
                             string halaldishes = s.Number + s.Dot + s.Name;
                             Console.WriteLine(halaldishes);
