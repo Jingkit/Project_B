@@ -51,7 +51,6 @@ namespace Main
                         {
                             theUser = "";
                         }
-
                     }
                     if (choice == "2")
                     {
@@ -93,7 +92,6 @@ namespace Main
                             string mail = Console.ReadLine();
                             Console.Write("Phone Number: ");
                             string number = Console.ReadLine();
-
                             json createFile = new json()
                             {
                                 firstname = name,
@@ -105,14 +103,11 @@ namespace Main
                             File.WriteAllText($"{theUser}_info.json", text);
                             Console.WriteLine("Information saved succesfully\n");
                         }
-
                         if (y == "2")
                         {
                             continue;
                         }
-
                     }
-
                 } // Account
                 if (x == "7")
                 {
@@ -211,8 +206,7 @@ namespace Main
                             {
                                 continue;
                             }
-                    }
-
+                        }
                     }
                     else if(option == "2")
                     {
@@ -232,7 +226,6 @@ namespace Main
                             holder = File.ReadAllText("Next Week Table Info.json");
                             tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
                         }
-
                         Console.WriteLine("Enter the day of your reservation\n1. Tuesday\n2. Wednesday\n3. Thursday\n4. Friday\n5. Saturday\n6. Sunday");
                         var day = Console.ReadLine();
                         Console.WriteLine("Enter the time of your reservation\n1. 16:00\n2. 18:00\n3. 20:00");
@@ -262,7 +255,6 @@ namespace Main
                         {
                             Console.WriteLine($"No table reserved on {firstname}");
                         }
-
                         //saves  the updated file
                         EditTableData(day, time, tableAvailability, tableData); // Edits the ReservationData class
                         var file = JsonConvert.SerializeObject(tableData, Formatting.Indented); // Converst ReservationData class into json
@@ -303,17 +295,11 @@ namespace Main
                             //this is a back-up of the earlier version
                             string backup = stuff.ToString();
                             File.WriteAllText("ok.json", backup);
-
-
-
                             //shows menu
                             foreach (var names in stuff)
                             {
                                 Console.WriteLine(names["Name"]);
                             }
-
-
-
                             //asks for the name of the dish of which u want to make a change to
                             Console.WriteLine("\nPlease type in the name of the dish you want to make changes to.\n" +
                                 "Note to type it right and that its capital sensetive, this is the current Menu");
@@ -325,9 +311,6 @@ namespace Main
                             //asks what u want to change it to
                             Console.WriteLine("What do you want to change this with");
                             var change = Console.ReadLine();
-
-
-
                             //making the change for the dish name
                             foreach (var idk in stuff)
                             {
@@ -365,8 +348,6 @@ namespace Main
                             //          }
                             //      }
 
-
-
                             //saves  the updated file
                             string updatedJsonString = stuff.ToString();
                             File.WriteAllText("details.json", updatedJsonString);
@@ -382,18 +363,14 @@ namespace Main
                     }
                 } // Admin
             }
-
-
         }
         static void AddDishes()
         {
             string json = File.ReadAllText("details.json");
             var array = JArray.Parse(json);
-            dynamic stuff = JsonConvert.DeserializeObject(json);        
-
+            dynamic stuff = JsonConvert.DeserializeObject(json);
             string updatedJsonString = stuff.ToString();
-            File.WriteAllText("dish.json", updatedJsonString);
-            
+            File.WriteAllText("dish.json", updatedJsonString);            
             Console.WriteLine("Name of the new dish.");
             string name = Console.ReadLine();            
             Console.WriteLine("Price");
@@ -414,17 +391,12 @@ namespace Main
             string ingr = Console.ReadLine();
             Console.WriteLine("Typedish choose from Appetizers, Entremets, Maindish, Desserts, Drinks");
             string typedish = Console.ReadLine();
-
             var a = String.Empty;
             foreach (var idk in stuff)
-            {
-                
-                    a = idk.Number;
-                
+            {                
+                    a = idk.Number;                
             }
-
             int e = int.Parse(a) + 1;
-
 
             var itemToAdd = new JObject();
             itemToAdd["Dot"] = ".";
@@ -439,9 +411,7 @@ namespace Main
             itemToAdd["Spicy"] = spicy;
             itemToAdd["Ingredients"] = ingr;
             itemToAdd["TypeDish"] = typedish;
-
             array.Add(itemToAdd);
-
             var jsonToOutput = JsonConvert.SerializeObject(array, Formatting.Indented);
             File.WriteAllText("details.json", jsonToOutput);
         }
@@ -456,11 +426,9 @@ namespace Main
                 if (names.TypeDish == "Appetizers")
                 {
                     Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
-
                     result = names.Number;
                 }
             }
-
             Console.WriteLine("         Entremets");
             string result1 = string.Empty;
             foreach (var names in stuff)
@@ -468,11 +436,9 @@ namespace Main
                 if (names.TypeDish == "Entremets")
                 {
                     Console.WriteLine(names["Number"] + names["Dot"] + names["Name"]);
-
                     result1 = names.Number;
                 }
             }
-
             Console.WriteLine("         Maindish");
             string result2 = string.Empty;
             foreach (var names in stuff)
@@ -484,7 +450,6 @@ namespace Main
                     result2 = names.Number;
                 }
             }
-
             Console.WriteLine("         Desserts");
             string result3 = string.Empty;
             foreach (var names in stuff)
@@ -496,7 +461,6 @@ namespace Main
                     result3 = names.Number;
                 }
             }
-
             Console.WriteLine("         Drinks");
             string result4 = string.Empty;
             foreach (var names in stuff)
@@ -531,22 +495,17 @@ namespace Main
             string json = File.ReadAllText("reviews.json");
             var array = JArray.Parse(json);
             dynamic stuff = JsonConvert.DeserializeObject(json);
-
-
             Console.WriteLine("Which dish do you want to review(Number or name of the dish)");
             string dishname = Console.ReadLine();
             Console.WriteLine("How many stars do you rate this dish(1-5)");
             string num = Console.ReadLine();
             Console.WriteLine("Could you explain why?");
             string ask = Console.ReadLine();
-
             var itemToAdd = new JObject();
             itemToAdd["Dish"] = dishname;
             itemToAdd["Stars"] = int.Parse(num);
             itemToAdd["Why"] = ask;
-
             array.Add(itemToAdd);
-
             var jsonToOutput = JsonConvert.SerializeObject(array, Formatting.Indented);
             System.IO.File.WriteAllText("reviews.json", jsonToOutput);
             return;
@@ -562,31 +521,24 @@ namespace Main
             List<string> appetizerDishesList = new List<string>(appetizerDishes);
             foreach (string x in appetizerDishes)
                 Console.WriteLine(x);
-
-
             //Main dishes
             Console.WriteLine("\nMain dishes");
             string[] mainDishes = { "4. Risotto ai funghi", "5. Melanzane alla Parmigiana", "6. Bistecca alla Fiorentina" };
             List<string> mainDishesList = new List<string>(mainDishes);
             foreach (string x in mainDishes)
                 Console.WriteLine(x);
-
-
             //Desserts
             Console.WriteLine("\nDesserts");
             string[] desserts = { "7. Tiramisu", "8. Gelato alla frutta" };
             List<string> dessertsList = new List<string>(desserts);
             foreach (string x in desserts)
                 Console.WriteLine(x);
-
-
             //Drinks
             Console.WriteLine("\nDrinks");
             string[] drinks = { "9. Limoncello", "10. Disaronno", "11. Sambuca" };
             List<string> drinksList = new List<string>(drinks);
             foreach (string x in drinks)
                 Console.WriteLine(x);
-
             Console.WriteLine("Press enter to go back");
             Console.ReadLine();
             CurrentMenuPage();
@@ -595,7 +547,6 @@ namespace Main
         {
             var json = File.ReadAllText("details.json");
             dynamic stuff = JsonConvert.DeserializeObject(json);
-
             Console.WriteLine("\nPlease press the number of the dish you want to know more information about.\n" +
                 "Or press 'v' to sort for vegetarian dishes, 'g' for glutenfree, 'h' for halal food, s for spicy and \n'0' to go back to the Main menu, " +
                 "follow that up by pressing Enter.");
@@ -721,12 +672,10 @@ namespace Main
                     usernamecheck = acc.ReadLine();
                     passwordcheck = acc.ReadLine();
                     acc.Close();
-
                     if (usernamecheck == username.Item1 && passwordcheck == username.Item2)
                     {
                         return true;
                     }
-
                     else
                     {
                         Console.WriteLine("Incorrect username or password");
@@ -748,7 +697,6 @@ namespace Main
             string username = Console.ReadLine();
             Console.Write("Enter a password: ");
             string password = Console.ReadLine();
-
             return Tuple.Create(username, password);
         }
         public static Dictionary<string, string> SetupTable(Table data)
@@ -1358,7 +1306,6 @@ namespace Main
                     };
                 }
             }
-
         }
         public static void ReserveTable(UserInfo theUser) // theUser == the users first name on which the table will be reserved
         {
@@ -1372,7 +1319,6 @@ namespace Main
             {
                 holder = File.ReadAllText("This Week Table Info.json");
                 tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
-
             }
             else if (week == "2") // Week 2
             {
@@ -1380,11 +1326,8 @@ namespace Main
                 tableData = JsonConvert.DeserializeObject<ReservationData>(holder);
             }
             Console.WriteLine("Pick a day\nMonday CLOSED\n1. Tuesday\n2. Wednesday\n3. Thursday\n4. Friday\n5. Saturday\n6. Sunday");
-
             string day = Console.ReadLine();
-
             Console.WriteLine("Pick a time\n1. 16:00\n2. 18:00\n3. 20:00");
-
             string time = Console.ReadLine();
             Console.WriteLine("\n___________________________________\n\n" +
                 "Every table has 4 seats, to make an reservation of more than 4 people,\nplease contact us via email or phone\n___________________________________\n");
@@ -1413,9 +1356,7 @@ namespace Main
             }
             var reservationDay = chosenDayTime(day, time, tableData); // Returns a Table class on the specific day and time
             var tableAvailability = SetupTable(reservationDay); // Returns a dictionary with the table as key and the values for the availability of a table as value
-
             Console.WriteLine("Pick an available table number\n"); 
-
             foreach (var table in tableAvailability) // Prints the available tables
             {
                 string available;
@@ -1429,20 +1370,16 @@ namespace Main
                 }
                 Console.WriteLine(table.Key + available);
             }
-
             string pick = Console.ReadLine();
             string confirmation = ConfirmationText(week, day, time);
-
             Console.WriteLine($"\nConfirm Reservation\n\nYou want to reservere a table on:\n" + confirmation + $"\nTable {pick}\nEstimated Costs: ${amount * 20}\n\n1. Confirm\n2. Cancel\n");
             confirmation = Console.ReadLine();
-
             if (confirmation == "1")
             {
                 if (tableAvailability["Table " + pick] == "")
                 {
                     tableAvailability["Table " + pick] = theUser.firstname;
                     SentEmail(theUser, day, time, week);
-
                 }
                 else
                 {
@@ -1453,7 +1390,6 @@ namespace Main
             {
                 Console.WriteLine("You have cancelled the reservation");
             }
-
             EditTableData(day, time, tableAvailability, tableData); // Edits the ReservationData class
             var file = JsonConvert.SerializeObject(tableData, Formatting.Indented); // Converst ReservationData class into json
             if (week == "1")
@@ -1520,14 +1456,11 @@ namespace Main
             {
                 allCodes.Add((int)number);
             }
-
             while (allCodes.Contains(randomNumber))
             {
                 randomNumber = generator.Next(100000, 999999);
             }
-
             allCodes.Add(randomNumber);
-
             Code code = new Code { reservationCode = allCodes };
             string json = JsonConvert.SerializeObject(code, Formatting.Indented);
             File.WriteAllText("allCodeNumbers.json", json);
@@ -1536,7 +1469,6 @@ namespace Main
             sentMail.UseDefaultCredentials = false;
             sentMail.DeliveryMethod = SmtpDeliveryMethod.Network;
             sentMail.Credentials = new NetworkCredential("1003967@hr.nl", "b2b256d1");
-
             try
             {
                 sentMail.Send("1003967@hr.nl", $"{reserveInfo.email}", "Reservation code", $"Thank you for making a reservation at our restaurant!\n\nYour Reservation Code is:\t{randomNumber}\nDate: {week} at {time} on {day}");
@@ -1546,7 +1478,6 @@ namespace Main
             {
                 Console.WriteLine("Error: " + ex.Message);
             }
-
             Console.WriteLine($"Reservation successful!\n\nAn email with the reservation code and date has been sent to {reserveInfo.email}.\n\nPress enter to return.");
             Console.ReadLine();
         }
