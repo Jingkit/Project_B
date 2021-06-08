@@ -1433,7 +1433,7 @@ namespace Main
             }
             else if(time == "2")
             {
-                time = "28:00";
+                time = "18:00";
             }
             else if (time == "3")
             {
