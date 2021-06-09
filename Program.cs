@@ -1468,10 +1468,10 @@ namespace Main
             sentMail.EnableSsl = true;
             sentMail.UseDefaultCredentials = false;
             sentMail.DeliveryMethod = SmtpDeliveryMethod.Network;
-            sentMail.Credentials = new NetworkCredential("1003967@hr.nl", "b2b256d1");
+            sentMail.Credentials = new NetworkCredential("XXXXXXX@hr.nl", "XXXXXXXX");
             try
             {
-                sentMail.Send("1003967@hr.nl", $"{reserveInfo.email}", "Reservation code", $"Thank you for making a reservation at our restaurant!\n\nYour Reservation Code is:\t{randomNumber}\nDate: {week} at {time} on {day}");
+                sentMail.Send("XXXXXXXX", $"{reserveInfo.email}", "Reservation code", $"Thank you for making a reservation at our restaurant!\n\nYour Reservation Code is:\t{randomNumber}\nDate: {week} at {time} on {day}");
                 Console.WriteLine("Email sent");
             }
             catch (Exception ex)
